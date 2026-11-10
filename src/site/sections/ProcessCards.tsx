@@ -17,10 +17,10 @@ export function ProcessCards() {
   }, { scope: root, dependencies: [lang], revertOnUpdate: true })
 
   const cards = [
-    { img: '/img/scan.webp', t: L('Digital Scan', 'Scan ديجيتال'), b: L('High-resolution intraoral scanning captures teeth, bite and gum line — no messy impressions.', 'Scan عالي الدقة للسنان والـbite واللثة — من غير طبعات مزعجة.'), to: '/services/checkup-cleaning' },
+    { img: '/img/scan.webp', t: L('Digital Scan', 'Scan ديجيتال'), b: L('High-resolution intraoral scanning captures teeth, bite and gum line — no messy impressions.', 'Scan عالي الدقة للسنان والـbite واللثة — من غير طبعات مزعجة.'), to: '/treatments/checkup-cleaning' },
     { img: '/img/plan.webp', t: L('Written Plan', 'خطة مكتوبة'), b: L('Every tooth, step, visit and cost is mapped and handed to you before treatment begins.', 'كل سنة وخطوة وزيارة وتكلفة مكتوبة في إيدك قبل ما العلاج يبدأ.'), to: '/book' },
-    { img: '/img/crown.webp', t: L('Precision Restorations', 'تركيبات دقيقة'), b: L('Zirconia and E-max crowns designed digitally and tried in before anything is final.', 'كراون زيركون وE-max متصممة ديجيتال وبتتجرب قبل أي تثبيت.'), to: '/services/crowns-bridges' },
-    { img: '/img/implant-jaw.webp', t: L('Guided Implants', 'زراعة بدليل جراحي'), b: L('3D-planned, guided placement — only when saving the natural tooth is truly not possible.', 'تخطيط 3D وزراعة بدليل — بس لما الحفاظ على السنة يبقى مش ممكن فعلًا.'), to: '/services/dental-implants' },
+    { img: '/img/crown.webp', t: L('Precision Restorations', 'تركيبات دقيقة'), b: L('Zirconia and E-max crowns designed digitally and tried in before anything is final.', 'كراون زيركون وE-max متصممة ديجيتال وبتتجرب قبل أي تثبيت.'), to: '/treatments/crowns-bridges' },
+    { img: '/img/implant-jaw.webp', t: L('Guided Implants', 'زراعة بدليل جراحي'), b: L('3D-planned, guided placement — only when saving the natural tooth is truly not possible.', 'تخطيط 3D وزراعة بدليل — بس لما الحفاظ على السنة يبقى مش ممكن فعلًا.'), to: '/treatments/dental-implants' },
   ]
 
   return (

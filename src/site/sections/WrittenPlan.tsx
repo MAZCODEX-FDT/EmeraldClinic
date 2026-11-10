@@ -5,16 +5,16 @@ import { useLang } from '@/lib/i18n'
 import { useDB, money } from '@/lib/store'
 
 export function WrittenPlan() {
-  const { t, lang, pick } = useLang()
+  const { t, lang, l } = useLang()
   const services = useDB((d) => d.services)
-  const row = (id: string) => services.find((s) => s.id === id)!
+  const row = (id: number) => services.find((s) => s.id === id)!
   const rows = [
-    { tooth: 36, s: row('s-rootcanal'), visits: lang === 'ar' ? '٢' : '2' },
-    { tooth: 36, s: row('s-crown'), visits: lang === 'ar' ? '٢' : '2' },
-    { tooth: 25, s: row('s-filling'), visits: lang === 'ar' ? '١' : '1' },
-    { tooth: 0, s: row('s-checkup'), visits: lang === 'ar' ? '١' : '1' },
+    { tooth: 36, s: row(3), visits: lang === 'ar' ? '٢' : '2' },
+    { tooth: 36, s: row(4), visits: lang === 'ar' ? '٢' : '2' },
+    { tooth: 25, s: row(2), visits: lang === 'ar' ? '١' : '1' },
+    { tooth: 0, s: row(1), visits: lang === 'ar' ? '١' : '1' },
   ]
-  const total = rows.reduce((a, r) => a + r.s.price, 0)
+  const total = rows.reduce((a, r) => a + r.s.charges, 0)
   const marked: Record<number, string> = { 36: '#1F7A5C', 25: '#BFE3D3' }
 
   return (
@@ -45,9 +45,9 @@ export function WrittenPlan() {
                 {rows.map((r, i) => (
                   <tr key={i} className="border-b border-deep/5">
                     <td className="py-4 font-display font-semibold text-deep">{r.tooth || '—'}</td>
-                    <td className="py-4 text-charcoal">{pick(r.s.name)}</td>
+                    <td className="py-4 text-charcoal">{l(r.s, 'name')}</td>
                     <td className="py-4 text-charcoal/70">{r.visits}</td>
-                    <td className="py-4 text-end tabular-nums text-charcoal">{money(r.s.price, lang)}</td>
+                    <td className="py-4 text-end tabular-nums text-charcoal">{money(r.s.charges, lang)}</td>
                   </tr>
                 ))}
               </tbody>

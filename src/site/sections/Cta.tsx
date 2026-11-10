@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, MessageCircle } from 'lucide-react'
 import ShinyText from '@/components/reactbits/ShinyText'
 import { useLang } from '@/lib/i18n'
-import { useDB } from '@/lib/store'
+import { useDB, mainBranch } from '@/lib/store'
 
 export function Cta() {
   const { t, lang } = useLang()
-  const wa = useDB((d) => d.settings.whatsapp)
+  const wa = useDB(mainBranch).whatsapp
   return (
     <section className="bg-white px-6 pb-24">
       <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-mist px-8 py-20 text-center md:py-28">

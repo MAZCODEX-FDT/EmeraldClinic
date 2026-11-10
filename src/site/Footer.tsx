@@ -3,7 +3,7 @@ import { Phone, MapPin, Clock, MessageCircle, Mail } from 'lucide-react'
 import { Logo, Mark } from '@/components/brand/Logo'
 import { BackgroundPaths } from '@/components/ui21/BackgroundPaths'
 import { useLang } from '@/lib/i18n'
-import { useDB } from '@/lib/store'
+import { useDB, mainBranch } from '@/lib/store'
 
 const Instagram = ({ className = '' }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={1.6}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" /></svg>
@@ -13,7 +13,8 @@ const Facebook = ({ className = '' }: { className?: string }) => (
 )
 
 export function Footer() {
-  const { t, pick } = useLang()
+  const { t, l } = useLang()
+  const b = useDB(mainBranch)
   const s = useDB((d) => d.settings)
   return (
     <footer id="contact" className="glow-bg grain relative overflow-hidden text-ivory">
@@ -27,16 +28,16 @@ export function Footer() {
           </div>
           <div>
             <p className="eyebrow text-jade">{t.footer.visit}</p>
-            <a href={s.mapUrl} target="_blank" rel="noreferrer" className="mt-4 flex items-start gap-2 text-ivory/80 hover:text-ivory"><MapPin className="mt-0.5 size-4 shrink-0 text-jade" />{pick(s.address)}</a>
+            <a href={b.map_url} target="_blank" rel="noreferrer" className="mt-4 flex items-start gap-2 text-ivory/80 hover:text-ivory"><MapPin className="mt-0.5 size-4 shrink-0 text-jade" />{l(b, 'address')}</a>
             <p className="eyebrow mt-8 text-jade">{t.footer.hours}</p>
-            <p className="mt-4 flex items-start gap-2 text-ivory/80"><Clock className="mt-0.5 size-4 shrink-0 text-jade" />{pick(s.hours)}</p>
+            <p className="mt-4 flex items-start gap-2 text-ivory/80"><Clock className="mt-0.5 size-4 shrink-0 text-jade" />{l(b, 'hours')}</p>
           </div>
           <div>
             <p className="eyebrow text-jade">{t.footer.contact}</p>
             <ul className="mt-4 space-y-3 text-ivory/80">
-              <li><a href={`tel:${s.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-ivory" dir="ltr"><Phone className="size-4 text-jade" />{s.phone}</a></li>
-              <li><a href={`https://wa.me/${s.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-ivory"><MessageCircle className="size-4 text-jade" />WhatsApp</a></li>
-              <li><a href={`mailto:${s.email}`} className="flex items-center gap-2 hover:text-ivory"><Mail className="size-4 text-jade" />{s.email}</a></li>
+              <li><a href={`tel:${b.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 hover:text-ivory" dir="ltr"><Phone className="size-4 text-jade" />{b.phone}</a></li>
+              <li><a href={`https://wa.me/${b.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-ivory"><MessageCircle className="size-4 text-jade" />WhatsApp</a></li>
+              <li><a href={`mailto:${b.email}`} className="flex items-center gap-2 hover:text-ivory"><Mail className="size-4 text-jade" />{b.email}</a></li>
             </ul>
           </div>
           <div>

@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
 import { Plus } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
+import { useDB } from '@/lib/store'
 import { gsap, useGSAP } from '@/lib/gsap'
-import { SectionHead } from './ServicesBento'
+import { SectionHead } from './SectionHead'
 
 function Item({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
   const body = useRef<HTMLDivElement>(null)
@@ -21,13 +22,14 @@ function Item({ q, a, open, onToggle }: { q: string; a: string; open: boolean; o
 }
 
 export function Faq() {
-  const { t } = useLang()
+  const { t, l } = useLang()
+  const faqs = useDB((d) => d.faqs)
   const [open, setOpen] = useState(0)
   return (
     <section className="bg-white px-6 py-28 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_1.4fr]">
         <div className="self-start lg:sticky lg:top-32"><SectionHead eyebrow={t.faq.eyebrow} title={t.faq.title} /></div>
-        <div>{t.faq.items.map((f, i) => <Item key={i} q={f.q} a={f.a} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />)}</div>
+        <div>{faqs.map((f, i) => <Item key={f.id} q={l(f, 'question')} a={l(f, 'answer')} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />)}</div>
       </div>
     </section>
   )

@@ -17,7 +17,7 @@ export default function DashLayout() {
   const [hover, setHover] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [q, setQ] = useState('')
-  const requests = useDB((d) => d.requests)
+  const requests = useDB((d) => d.enquiries)
   const patients = useDB((d) => d.patients)
   const newReq = useMemo(() => requests.filter((r) => r.status === 'new').length, [requests])
   const results = useMemo(() => (q.trim().length < 2 ? [] : patients.filter((p) => p.name.toLowerCase().includes(q.toLowerCase()) || p.phone.includes(q)).slice(0, 6)), [q, patients])
@@ -30,12 +30,12 @@ export default function DashLayout() {
     { to: '/dashboard', end: true, icon: LayoutGrid, label: tr('Overview', 'نظرة عامة') },
     { to: '/dashboard/appointments', icon: CalendarDays, label: tr('Appointments', 'المواعيد') },
     { to: '/dashboard/patients', icon: Users, label: tr('Patients', 'المرضى') },
-    { to: '/dashboard/requests', icon: Inbox, label: tr('Booking requests', 'طلبات الحجز'), badge: newReq },
-    { to: '/dashboard/services', icon: Stethoscope, label: tr('Treatments', 'العلاجات') },
+    { to: '/dashboard/leads', icon: Inbox, label: tr('Leads', 'العملاء المحتملين'), badge: newReq },
+    { to: '/dashboard/services', icon: Stethoscope, label: tr('Services', 'الخدمات') },
     { to: '/dashboard/doctors', icon: UserRound, label: tr('Doctors', 'الأطباء') },
     { to: '/dashboard/reviews', icon: Star, label: tr('Reviews', 'التقييمات') },
     { to: '/dashboard/finance', icon: Wallet, label: tr('Finance', 'الحسابات') },
-    { to: '/dashboard/settings', icon: Settings, label: tr('Settings', 'الإعدادات') },
+    { to: '/dashboard/settings', icon: Settings, label: tr('Settings & MazMed', 'الإعدادات و MazMed') },
   ]
   const expanded = hover || mobile
 

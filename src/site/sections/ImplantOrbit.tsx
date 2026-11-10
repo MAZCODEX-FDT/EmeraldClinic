@@ -46,7 +46,7 @@ export function ImplantOrbit() {
               <div data-label key={l.t} className={`max-w-[15rem] lg:absolute ${l.cls}`}>
                 <p className="flex items-center gap-2 font-medium text-charcoal"><span className="size-2 rounded-full bg-emerald shadow-[0_0_0_4px_rgba(31,122,92,.15)]" />{l.t}</p>
                 <p className="mt-1.5 ps-4 text-xs leading-relaxed text-stone">{l.b}</p>
-                <Link to="/services/dental-implants" className="mt-2 inline-flex items-center gap-1 ps-4 text-xs text-charcoal hover:text-emerald">{L('More', 'المزيد')}<Plus className="size-3" /></Link>
+                <Link to="/treatments/dental-implants" className="mt-2 inline-flex items-center gap-1 ps-4 text-xs text-charcoal hover:text-emerald">{L('More', 'المزيد')}<Plus className="size-3" /></Link>
               </div>
             ))}
           </div>

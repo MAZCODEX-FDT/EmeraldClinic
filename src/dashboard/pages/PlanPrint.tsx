@@ -1,26 +1,39 @@
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { Printer, Phone, MapPin, Globe } from 'lucide-react'
 import { Logo, Mark } from '@/components/brand/Logo'
 import { DentalArch } from '@/components/dental/DentalArch'
 import { useLang } from '@/lib/i18n'
-import { useDB, money, todayISO } from '@/lib/store'
+import { useDB, money, todayISO, loc, doctorName, mainBranch, type DB } from '@/lib/store'
 import { auth } from '../auth'
 import { useTr, fmtDate } from '../ui'
-import { TOOTH_STATES } from './PatientDetail'
+import { activeOption, itemTotal, isOpen } from '../plans'
+import { toothLook } from '../teeth'
+
+const branchOf = (d: DB) => mainBranch(d)
 
 /** Branded A4 "written plan" — letterhead per Emerald stationery (ghost-mark corners, emerald corner triangles, footer line). */
 export default function PlanPrint() {
   const { id } = useParams()
+  const [qs] = useSearchParams()
   const tr = useTr()
-  const { lang, pick } = useLang()
-  const p = useDB((d) => d.patients).find((x) => x.id === id)
+  const { lang } = useLang()
+  const pid = Number(id)
+  const p = useDB((d) => d.patients).find((x) => x.id === pid)
   const services = useDB((d) => d.services)
-  const s = useDB((d) => d.settings)
+  const doctors = useDB((d) => d.doctors)
+  const allPlans = useDB((d) => d.plans)
+  const allChart = useDB((d) => d.chart)
+  const b = useDB(branchOf)
   if (!auth.isIn()) return <Navigate to="/dashboard/login" replace />
   if (!p) return <Navigate to="/dashboard/patients" replace />
-  const total = p.plan.reduce((a, i) => a + i.cost, 0)
-  const marked = new Set(p.plan.filter((i) => i.status !== 'done').map((i) => i.tooth))
-  const st = (fdi: number) => TOOTH_STATES.find((x) => x.k === (p.teeth[fdi] ?? 'healthy'))!
+  const mine = allPlans.filter((x) => x.patient_id === pid).sort((a, c) => c.created_at.localeCompare(a.created_at))
+  const plan = mine.find((x) => x.id === Number(qs.get('plan'))) ?? mine.find(isOpen) ?? mine[0]
+  const option = plan ? activeOption(plan) : undefined
+  const items = option?.items.filter((i) => i.status !== 'cancelled') ?? []
+  const total = Math.max(0, items.reduce((a, i) => a + itemTotal(i), 0) - (option?.discount ?? 0))
+  const chart = allChart.filter((c) => c.patient_id === pid)
+  const marked = new Set(items.filter((i) => i.status !== 'done').map((i) => Number(i.site)))
+  const doc = plan ? doctors.find((d) => d.id === plan.doctor_id) : undefined
 
   return (
     <div className="min-h-screen bg-stone/20 py-10 print:bg-white print:py-0">
@@ -37,7 +50,8 @@ export default function PlanPrint() {
           <Logo size={44} />
           <div className="me-20 text-end text-xs text-stone">
             <p className="eyebrow text-emerald">{tr('Written treatment plan', 'خطة علاج مكتوبة')}</p>
-            <p className="mt-1">{fmtDate(todayISO(), lang, { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+            <p className="mt-1">{plan?.reference} · {fmtDate(todayISO(), lang, { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+            {plan?.valid_until && <p className="mt-0.5">{tr('Valid until', 'سارية حتى')} {fmtDate(plan.valid_until, lang, { day: 'numeric', month: 'short', year: 'numeric' })}</p>}
           </div>
         </header>
 
@@ -45,28 +59,28 @@ export default function PlanPrint() {
           <div>
             <p className="text-xs text-stone">{tr('Prepared for', 'مكتوبة لـ')}</p>
             <h1 className="font-display mt-1 text-3xl font-semibold text-deep">{p.name}</h1>
-            <p className="mt-1 text-sm text-stone" dir="ltr">{p.phone}</p>
+            <p className="mt-1 text-sm text-stone"><span dir="ltr">{p.phone}</span> · {p.patient_unique_id}</p>
             <p className="font-display mt-6 max-w-sm text-lg leading-snug text-deep">{tr('Your plan, written first. Take it home and decide calmly.', 'خطتك مكتوبة قبل ما نبدأ. خدها البيت وقرر براحتك.')}</p>
           </div>
           <DentalArch width={260} className="w-[52mm]" showNumbers={false}
-            fill={(g) => (marked.has(g.fdi) ? '#1F7A5C' : st(g.fdi).k === 'missing' ? 'transparent' : '#FFFFFF')}
+            fill={(g) => (marked.has(g.fdi) ? '#1F7A5C' : toothLook(chart, g.fdi).missing ? 'transparent' : '#FFFFFF')}
             stroke={(g) => (marked.has(g.fdi) ? '#0E4D3C' : '#BFE3D3')} />
         </section>
 
         <table className="relative mt-10 w-full text-sm">
           <thead><tr className="border-b-2 border-deep text-xs text-deep">
-            <th className="py-2 text-start">#</th><th className="py-2 text-start">{tr('Tooth', 'السنة')}</th><th className="py-2 text-start">{tr('Treatment', 'العلاج')}</th><th className="py-2 text-start">{tr('Visits', 'الزيارات')}</th><th className="py-2 text-end">{tr('Estimate', 'التكلفة')}</th>
+            <th className="py-2 text-start">#</th><th className="py-2 text-start">{tr('Tooth', 'السنة')}</th><th className="py-2 text-start">{tr('Treatment', 'العلاج')}</th><th className="py-2 text-start">{tr('Phase', 'المرحلة')}</th><th className="py-2 text-end">{tr('Estimate', 'التكلفة')}</th>
           </tr></thead>
           <tbody>
-            {p.plan.map((i, n) => {
-              const sv = services.find((x) => x.id === i.serviceId)
+            {[...items].sort((a, c) => a.phase - c.phase).map((i, n) => {
+              const sv = services.find((x) => x.id === i.service_id)
               return (
                 <tr key={i.id} className="border-b border-deep/10">
                   <td className="py-3 text-stone">{n + 1}</td>
-                  <td className="font-display py-3 font-semibold text-deep">{i.tooth ?? '—'}</td>
-                  <td className="py-3">{sv ? pick(sv.name) : '—'}{i.note && <span className="block text-xs text-stone">{i.note}</span>}</td>
-                  <td className="py-3 text-stone">{sv ? pick(sv.sessions) : ''}</td>
-                  <td className="py-3 text-end tabular-nums">{money(i.cost, lang)}</td>
+                  <td className="font-display py-3 font-semibold text-deep">{i.site ?? '—'}</td>
+                  <td className="py-3">{sv ? loc(sv, 'name', lang) : '—'}{i.qty > 1 && <span className="text-stone"> × {i.qty}</span>}</td>
+                  <td className="py-3 text-stone">{i.phase}</td>
+                  <td className="py-3 text-end tabular-nums">{money(itemTotal(i), lang)}</td>
                 </tr>
               )
             })}
@@ -79,13 +93,13 @@ export default function PlanPrint() {
         <p className="relative mt-4 text-xs leading-relaxed text-stone">{tr('Estimates do not change without your agreement. We always try to save your tooth first; alternatives were explained during your visit.', 'التكلفة التقديرية مبتتغيرش غير بموافقتك. دايمًا بنحاول نحافظ على سنتك الأول، والبدائل اتشرحت في زيارتك.')}</p>
 
         <div className="relative mt-auto grid grid-cols-2 gap-10 pt-16 text-xs text-stone">
-          <div className="border-t border-deep/30 pt-2">{tr('Treating doctor', 'الطبيب المعالج')}</div>
+          <div className="border-t border-deep/30 pt-2">{tr('Treating doctor', 'الطبيب المعالج')}{doc && <span className="block text-charcoal">{doctorName(doc, lang)}</span>}</div>
           <div className="border-t border-deep/30 pt-2">{tr('Patient signature', 'توقيع المريض')}</div>
         </div>
         <footer className="relative mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-emerald pt-4 text-[0.7rem] text-charcoal/70">
-          <span className="flex items-center gap-1.5"><Phone className="size-3 text-emerald" /><span dir="ltr">{s.phone}</span></span>
-          <span className="flex items-center gap-1.5"><MapPin className="size-3 text-emerald" />{pick(s.address)}</span>
-          <span className="flex items-center gap-1.5"><Globe className="size-3 text-emerald" />{s.email}</span>
+          <span className="flex items-center gap-1.5"><Phone className="size-3 text-emerald" /><span dir="ltr">{b?.phone}</span></span>
+          <span className="flex items-center gap-1.5"><MapPin className="size-3 text-emerald" />{b ? loc(b, 'address', lang) : ''}</span>
+          <span className="flex items-center gap-1.5"><Globe className="size-3 text-emerald" />{b?.email}</span>
         </footer>
       </article>
     </div>

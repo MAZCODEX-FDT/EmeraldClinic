@@ -4,15 +4,16 @@ import { DisplayCards } from '@/components/ui21/DisplayCards'
 import AnimatedContent from '@/components/reactbits/AnimatedContent'
 import { useLang } from '@/lib/i18n'
 import { useDB } from '@/lib/store'
-import { SectionHead } from './ServicesBento'
+import { SectionHead } from './SectionHead'
 
 export function Reviews() {
-  const { t, lang, pick } = useLang()
+  const { t, lang, l } = useLang()
   const reviews = useDB((d) => d.reviews)
   const services = useDB((d) => d.services)
-  const visible = useMemo(() => reviews.filter((r) => r.visible), [reviews])
-  const mine = useMemo(() => [...visible.filter((r) => r.lang === lang), ...visible.filter((r) => r.lang !== lang)], [visible, lang])
-  const svc = (id?: string) => { const s = services.find((x) => x.id === id); return s ? pick(s.name) : '' }
+  const isAr = (txt: string) => /[\u0600-\u06FF]/.test(txt)
+  const visible = useMemo(() => reviews.filter((r) => r.is_published), [reviews])
+  const mine = useMemo(() => [...visible.filter((r) => isAr(r.review) === (lang === 'ar')), ...visible.filter((r) => isAr(r.review) !== (lang === 'ar'))], [visible, lang])
+  const svc = (id: number | null) => { const s = services.find((x) => x.id === id); return s ? l(s, 'name') : '' }
 
   return (
     <section id="reviews" className="overflow-hidden bg-cloud px-6 py-28 md:py-36">
@@ -21,10 +22,10 @@ export function Reviews() {
           <SectionHead eyebrow={t.reviews.eyebrow} title={t.reviews.title} />
           <AnimatedContent stagger={0.1} distance={40} className="mt-10 space-y-4">
             {mine.slice(3, 6).map((r) => (
-              <figure key={r.id} className="rounded-2xl border border-deep/10 bg-white/70 p-5" dir={r.lang === 'ar' ? 'rtl' : 'ltr'}>
+              <figure key={r.id} className="rounded-2xl border border-deep/10 bg-white/70 p-5" dir={isAr(r.review) ? 'rtl' : 'ltr'}>
                 <div className="flex gap-0.5 text-emerald">{Array.from({ length: r.rating }).map((_, i) => <Star key={i} className="size-3.5 fill-current" />)}</div>
-                <blockquote className="mt-2 leading-relaxed text-charcoal/85">{r.text}</blockquote>
-                <figcaption className="mt-2 text-xs text-stone">{r.name} · {svc(r.serviceId)}</figcaption>
+                <blockquote className="mt-2 leading-relaxed text-charcoal/85">{r.review}</blockquote>
+                <figcaption className="mt-2 text-xs text-stone">{r.name} · {svc(r.service_id)}</figcaption>
               </figure>
             ))}
           </AnimatedContent>
@@ -33,9 +34,9 @@ export function Reviews() {
           <DisplayCards
             cards={mine.slice(0, 3).map((r) => ({
               icon: <Quote className="size-4" />,
-              title: <span dir={r.lang === 'ar' ? 'rtl' : 'ltr'}>{r.name}</span>,
-              description: <span dir={r.lang === 'ar' ? 'rtl' : 'ltr'} className="block">{r.text}</span>,
-              date: svc(r.serviceId),
+              title: <span dir={isAr(r.review) ? 'rtl' : 'ltr'}>{r.name}</span>,
+              description: <span dir={isAr(r.review) ? 'rtl' : 'ltr'} className="block">{r.review}</span>,
+              date: svc(r.service_id),
             }))}
           />
         </div>

@@ -85,3 +85,5 @@ html[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
 @utility fade-b { -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
 @utility thin { font-weight: 250; }
 html[dir="rtl"] .thin { font-weight: 300; }
+
+@keyframes pathsDrift { from { transform: translate3d(-3%, -2%, 0) rotate(-1deg); } to { transform: translate3d(3%, 2%, 0) rotate(1deg); } }

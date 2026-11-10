@@ -25,11 +25,10 @@ export function Navbar() {
   }, { scope: menuRef, dependencies: [open] })
 
   const links = [
-    { to: '/services', label: t.nav.services },
+    { to: '/treatments', label: t.nav.services },
     { to: '/doctors', label: t.nav.doctors },
-    { to: '/#journey', label: t.nav.journey },
-    { to: '/#reviews', label: t.nav.reviews },
-    { to: '/#contact', label: t.nav.contact },
+    { to: '/visit', label: t.nav.journey },
+    { to: '/contact', label: t.nav.contact },
   ]
 
   return (

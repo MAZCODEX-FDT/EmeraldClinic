@@ -2,7 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { X } from 'lucide-react'
 import { useLang } from '@/lib/i18n'
 import { gsap } from '@/lib/gsap'
-import type { ApptStatus, RequestStatus, PlanStatus } from '@/lib/store'
+import type { AppointmentStatus, EnquiryStatus, PlanItemStatus, PlanStatus } from '@/lib/store'
 
 export const useTr = () => {
   const { lang } = useLang()
@@ -30,27 +30,41 @@ export function Card({ children, className = '' }: { children: ReactNode; classN
   return <div className={`card-dash p-5 md:p-6 ${className}`}>{children}</div>
 }
 
-const apptColors: Record<ApptStatus, string> = {
-  booked: 'bg-beige text-charcoal', confirmed: 'bg-jade/60 text-deep', arrived: 'bg-emerald/15 text-emerald',
-  'in-chair': 'bg-emerald text-ivory', done: 'bg-deep text-ivory', 'no-show': 'bg-stone/20 text-charcoal', cancelled: 'bg-stone/10 text-stone line-through',
+const apptColors: Record<AppointmentStatus, string> = {
+  booked: 'bg-jade/60 text-deep', checked_in: 'bg-emerald text-ivory', completed: 'bg-deep text-ivory',
+  cancelled: 'bg-stone/10 text-stone line-through', cancelled_by_doctor: 'bg-stone/10 text-stone line-through',
+  no_show: 'bg-beige text-charcoal', rescheduled: 'bg-stone/15 text-charcoal',
 }
-export const apptLabel = (s: ApptStatus, ar: boolean) =>
-  (ar ? { booked: 'محجوز', confirmed: 'مؤكد', arrived: 'وصل', 'in-chair': 'على الكرسي', done: 'خلص', 'no-show': 'لم يحضر', cancelled: 'ملغي' } : { booked: 'Booked', confirmed: 'Confirmed', arrived: 'Arrived', 'in-chair': 'In chair', done: 'Done', 'no-show': 'No-show', cancelled: 'Cancelled' })[s]
-export function ApptBadge({ s }: { s: ApptStatus }) {
+/** MazMed Appointment statuses */
+export const apptLabel = (s: AppointmentStatus, ar: boolean) =>
+  (ar ? { booked: 'محجوز', checked_in: 'وصل', completed: 'تم', cancelled: 'ملغي', cancelled_by_doctor: 'ألغاه الطبيب', no_show: 'لم يحضر', rescheduled: 'تم تأجيله' }
+    : { booked: 'Booked', checked_in: 'Checked in', completed: 'Completed', cancelled: 'Cancelled', cancelled_by_doctor: 'Cancelled by doctor', no_show: 'No-show', rescheduled: 'Rescheduled' })[s]
+export function ApptBadge({ s }: { s: AppointmentStatus }) {
   const { lang } = useLang()
   return <span className={`inline-flex rounded-full px-2.5 py-1 text-[0.7rem] font-medium whitespace-nowrap ${apptColors[s]}`}>{apptLabel(s, lang === 'ar')}</span>
 }
-const reqColors: Record<RequestStatus, string> = { new: 'bg-emerald text-ivory', contacted: 'bg-jade/60 text-deep', booked: 'bg-deep text-ivory', declined: 'bg-stone/15 text-stone' }
-export function ReqBadge({ s }: { s: RequestStatus }) {
-  const tr = useTr()
-  const l = { new: tr('New', 'جديد'), contacted: tr('Contacted', 'تم التواصل'), booked: tr('Booked', 'اتحجز'), declined: tr('Declined', 'مرفوض') }[s]
-  return <span className={`inline-flex rounded-full px-2.5 py-1 text-[0.7rem] font-medium ${reqColors[s]}`}>{l}</span>
+/** MazMed Enquiry (lead) statuses */
+const leadColors: Record<EnquiryStatus, string> = { new: 'bg-emerald text-ivory', contacted: 'bg-jade/60 text-deep', qualified: 'bg-beige text-charcoal', booked: 'bg-deep text-ivory', lost: 'bg-stone/15 text-stone', spam: 'bg-stone/10 text-stone line-through' }
+export const leadLabel = (s: EnquiryStatus, ar: boolean) =>
+  (ar ? { new: 'جديد', contacted: 'تم التواصل', qualified: 'مؤهل', booked: 'اتحجز', lost: 'خسرناه', spam: 'سبام' }
+    : { new: 'New', contacted: 'Contacted', qualified: 'Qualified', booked: 'Booked', lost: 'Lost', spam: 'Spam' })[s]
+export function ReqBadge({ s }: { s: EnquiryStatus }) {
+  const { lang } = useLang()
+  return <span className={`inline-flex rounded-full px-2.5 py-1 text-[0.7rem] font-medium ${leadColors[s]}`}>{leadLabel(s, lang === 'ar')}</span>
 }
-export function PlanBadge({ s }: { s: PlanStatus }) {
+/** MazMed TreatmentPlanItem statuses */
+export function PlanBadge({ s }: { s: PlanItemStatus }) {
   const tr = useTr()
-  const m = { planned: ['bg-beige text-charcoal', tr('Planned', 'مخطط')], 'in-progress': ['bg-jade/60 text-deep', tr('In progress', 'جاري')], done: ['bg-deep text-ivory', tr('Done', 'تم')] }[s]
+  const m = { planned: ['bg-beige text-charcoal', tr('Planned', 'مخطط')], in_progress: ['bg-jade/60 text-deep', tr('In progress', 'جاري')], done: ['bg-deep text-ivory', tr('Done', 'تم')], cancelled: ['bg-stone/10 text-stone', tr('Cancelled', 'ملغي')] }[s]
   return <span className={`inline-flex rounded-full px-2.5 py-1 text-[0.7rem] font-medium ${m[0]}`}>{m[1]}</span>
 }
+/** MazMed TreatmentPlan statuses */
+export const planLabel = (s: PlanStatus, ar: boolean) =>
+  (ar ? { draft: 'مسودة', quoted: 'متسعّرة', accepted: 'موافق عليها', in_progress: 'جارية', completed: 'خلصت', declined: 'مرفوضة', cancelled: 'ملغية' }
+    : { draft: 'Draft', quoted: 'Quoted', accepted: 'Accepted', in_progress: 'In progress', completed: 'Completed', declined: 'Declined', cancelled: 'Cancelled' })[s]
+/** MazMed PaymentMethod keys */
+export const methodLabel = (m: string, ar: boolean) =>
+  (ar ? { cash: 'كاش', card_pos: 'فيزا', wallet: 'محفظة', instapay: 'إنستاباي', bank_transfer: 'تحويل بنكي' } : { cash: 'Cash', card_pos: 'Card', wallet: 'Wallet', instapay: 'InstaPay', bank_transfer: 'Bank transfer' } as Record<string, string>)[m] ?? m
 
 export function Modal({ open, onClose, title, children, wide = false }: { open: boolean; onClose: () => void; title: string; children: ReactNode; wide?: boolean }) {
   const ref = useRef<HTMLDivElement>(null)

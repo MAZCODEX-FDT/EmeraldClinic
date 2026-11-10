@@ -7,18 +7,18 @@ import { useDB } from '@/lib/store'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { PillCta } from './HeroLight'
 
-const PHOTO: Record<string, { img: string; tags: { en: string; ar: string }[] }> = {
-  's-aligners': { img: '/img/aligner-life.webp', tags: [{ en: 'Invisible', ar: 'مش باين' }, { en: 'Removable', ar: 'بيتشال' }, { en: 'Comfort fit', ar: 'مريح' }] },
-  's-kids': { img: '/img/kids.webp', tags: [{ en: 'Gentle', ar: 'هادي' }, { en: 'No fear', ar: 'من غير خوف' }] },
-  's-veneers': { img: '/img/smile.webp', tags: [{ en: 'Mock-up first', ar: 'Mock-up الأول' }, { en: 'Natural', ar: 'طبيعي' }] },
-  's-implant': { img: '/img/implant-jaw.webp', tags: [{ en: '3D planned', ar: 'متخطط 3D' }, { en: 'Guided', ar: 'بدليل جراحي' }] },
+const PHOTO: Record<number, { img: string; tags: { en: string; ar: string }[] }> = {
+  8: { img: '/img/aligner-life.webp', tags: [{ en: 'Invisible', ar: 'مش باين' }, { en: 'Removable', ar: 'بيتشال' }, { en: 'Comfort fit', ar: 'مريح' }] },
+  9: { img: '/img/kids.webp', tags: [{ en: 'Gentle', ar: 'هادي' }, { en: 'No fear', ar: 'من غير خوف' }] },
+  7: { img: '/img/smile.webp', tags: [{ en: 'Mock-up first', ar: 'Mock-up الأول' }, { en: 'Natural', ar: 'طبيعي' }] },
+  5: { img: '/img/implant-jaw.webp', tags: [{ en: '3D planned', ar: 'متخطط 3D' }, { en: 'Guided', ar: 'بدليل جراحي' }] },
 }
 
 export function TreatmentSlider() {
-  const { pick, lang } = useLang()
+  const { pick, lang, l } = useLang()
   const L = useL()
   const services = useDB((d) => d.services)
-  const list = useMemo(() => services.filter((s) => s.visible), [services])
+  const list = useMemo(() => services.filter((s) => s.status && s.show_on_website).sort((a, b) => a.sort_order - b.sort_order), [services])
   const track = useRef<HTMLDivElement>(null)
   const root = useRef<HTMLElement>(null)
   useGSAP(() => {
@@ -45,12 +45,12 @@ export function TreatmentSlider() {
         {list.map((s) => {
           const ph = PHOTO[s.id]
           return (
-            <Link data-tcard key={s.id} to={`/services/${s.slug}`} className="group relative flex h-[26rem] w-[19rem] shrink-0 snap-start flex-col overflow-hidden rounded-[1.75rem] bg-mist transition-colors hover:bg-jade/50 md:w-[21rem]">
+            <Link data-tcard key={s.id} to={`/treatments/${s.slug}`} className="group relative flex h-[26rem] w-[19rem] shrink-0 snap-start flex-col overflow-hidden rounded-[1.75rem] bg-mist transition-colors hover:bg-jade/50 md:w-[21rem]">
               {ph ? (
                 <>
                   <img src={ph.img} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-premium group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-deep/40" />
-                  <p className="font-display relative p-6 text-lg font-medium text-charcoal">{pick(s.name)}</p>
+                  <p className="font-display relative p-6 text-lg font-medium text-charcoal">{l(s, 'name')}</p>
                   <div className="relative mt-auto flex flex-wrap gap-2 p-5">
                     {ph.tags.map((t) => <span key={t.en} className="rounded-full bg-white/90 px-4 py-2 text-[0.65rem] tracking-[0.15em] text-charcoal uppercase backdrop-blur">{pick(t)}</span>)}
                   </div>
@@ -58,13 +58,13 @@ export function TreatmentSlider() {
               ) : (
                 <>
                   <div className="flex items-start justify-between p-6">
-                    <p className="font-display text-lg font-medium text-charcoal">{pick(s.name)}</p>
+                    <p className="font-display text-lg font-medium text-charcoal">{l(s, 'name')}</p>
                     <DentalIcon name={s.icon} size={30} className="text-emerald/60 transition-colors group-hover:text-deep" />
                   </div>
                   <div className="mt-auto border-t border-deep/10 p-6">
-                    <p className="text-xs leading-relaxed text-charcoal/65">{pick(s.short)}</p>
+                    <p className="text-xs leading-relaxed text-charcoal/65">{l(s, 'short_description')}</p>
                     <div className="mt-5 flex items-center justify-between">
-                      <span className="flex items-center gap-1.5 text-sm font-semibold text-charcoal"><Clock className="size-3.5" />{s.duration} {L('min', 'دقيقة')}</span>
+                      <span className="flex items-center gap-1.5 text-sm font-semibold text-charcoal"><Clock className="size-3.5" />{s.service_time} {L('min', 'دقيقة')}</span>
                       <span className="flex items-center gap-1 text-[0.65rem] tracking-[0.2em] text-charcoal underline-offset-4 group-hover:underline">{L('LEARN MORE', 'اعرف أكتر')}<ArrowUpRight className="size-3 rtl:-scale-x-100" /></span>
                     </div>
                   </div>

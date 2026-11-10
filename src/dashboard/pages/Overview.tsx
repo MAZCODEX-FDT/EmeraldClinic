@@ -4,46 +4,58 @@ import { Area, AreaChart, Bar, BarChart, CartesianGrid, ResponsiveContainer, Too
 import { CalendarCheck, Inbox, Wallet, Armchair, ArrowUpRight, FileClock } from 'lucide-react'
 import CountUp from '@/components/reactbits/CountUp'
 import { useLang } from '@/lib/i18n'
-import { useDB, todayISO, addDays, money } from '@/lib/store'
+import { useDB, todayISO, addDays, money, loc, doctorName } from '@/lib/store'
+import { startOf, endOf } from './Appointments'
+import { optionTotal } from '../plans'
 import { PageHeader, Card, ApptBadge, ReqBadge, useTr, fmtDate } from '../ui'
 
 export default function Overview() {
   const tr = useTr()
-  const { lang, pick } = useLang()
+  const { lang } = useLang()
   const appts = useDB((d) => d.appointments)
   const patients = useDB((d) => d.patients)
   const services = useDB((d) => d.services)
   const doctors = useDB((d) => d.doctors)
-  const requests = useDB((d) => d.requests)
-  const payments = useDB((d) => d.payments)
-  const chairs = useDB((d) => d.settings.chairs)
+  const enquiries = useDB((d) => d.enquiries)
+  const invoices = useDB((d) => d.invoices)
+  const plans = useDB((d) => d.plans)
+  const resources = useDB((d) => d.resources)
   const today = todayISO()
 
   const data = useMemo(() => {
-    const todays = appts.filter((a) => a.date === today && a.status !== 'cancelled').sort((a, b) => a.time.localeCompare(b.time))
+    const live = (s: string) => !['cancelled', 'cancelled_by_doctor', 'rescheduled'].includes(s)
+    const todays = appts.filter((a) => a.date === today && live(a.status)).sort((a, b) => startOf(a) - startOf(b))
+    const payments = invoices.flatMap((i) => i.payments.map((p) => ({ ...p, inv: i })))
     const monthStart = today.slice(0, 8) + '01'
-    const revenue = payments.filter((p) => p.date >= monthStart).reduce((s, p) => s + p.amount, 0)
-    const chairMinutes = todays.reduce((s, a) => s + a.duration, 0)
-    const occupancy = Math.min(100, Math.round((chairMinutes / (chairs * 600)) * 100))
+    const revenue = payments.filter((p) => p.paid_at >= monthStart).reduce((s, p) => s + p.amount, 0)
+    const chairMinutes = todays.reduce((s, a) => s + (endOf(a) - startOf(a)), 0)
+    const occupancy = Math.min(100, Math.round((chairMinutes / (Math.max(1, resources.length) * 600)) * 100))
     const visits = Array.from({ length: 14 }, (_, i) => {
       const d = addDays(today, i - 13)
-      return { d: fmtDate(d, lang), v: appts.filter((a) => a.date === d && a.status === 'done').length, r: payments.filter((p) => p.date === d).reduce((s, p) => s + p.amount, 0) }
+      return { d: fmtDate(d, lang), v: appts.filter((a) => a.date === d && a.status === 'completed').length }
     })
     const since = addDays(today, -30)
-    const byService = services.map((s) => ({ n: pick(s.name), v: payments.filter((p) => p.date >= since && p.note === s.name.en).reduce((a, p) => a + p.amount, 0) }))
-      .filter((x) => x.v > 0).sort((a, b) => b.v - a.v).slice(0, 6)
-    const pendingPlans = patients.filter((p) => !p.planApproved && p.plan.some((i) => i.status === 'planned'))
+    const bySvc = new Map<string, number>()
+    for (const p of payments.filter((x) => x.paid_at >= since)) {
+      const appt = appts.find((a) => a.id === p.inv.appointment_id)
+      const s = services.find((x) => x.id === appt?.service_ids[0])
+      const n = s ? loc(s, 'name', lang) : p.inv.lines[0]?.description ?? '—'
+      bySvc.set(n, (bySvc.get(n) ?? 0) + p.amount)
+    }
+    const byService = [...bySvc].map(([n, v]) => ({ n, v })).sort((a, b) => b.v - a.v).slice(0, 6)
+    const pendingPlans = plans.filter((x) => x.status === 'draft' || x.status === 'quoted')
     return { todays, revenue, occupancy, visits, byService, pendingPlans }
-  }, [appts, payments, services, patients, chairs, today, lang, pick])
+  }, [appts, invoices, services, plans, resources, today, lang])
 
-  const newReq = requests.filter((r) => r.status === 'new')
-  const pName = (id: string) => patients.find((p) => p.id === id)?.name ?? '—'
-  const sName = (id: string) => { const s = services.find((x) => x.id === id); return s ? pick(s.name) : '—' }
-  const doc = (id: string) => doctors.find((d) => d.id === id)
+  const newReq = enquiries.filter((r) => r.status === 'new')
+  const pName = (id: number) => patients.find((p) => p.id === id)?.name ?? '—'
+  const sName = (id: number | null) => { const s = services.find((x) => x.id === id); return s ? loc(s, 'name', lang) : '—' }
+  const doc = (id: number) => doctors.find((d) => d.id === id)
+  const chairName = (id: number | null) => { const r = resources.find((x) => x.id === id); return r ? loc(r, 'name', lang) : '' }
 
   const kpis = [
     { icon: CalendarCheck, label: tr("Today's visits", 'زيارات النهارده'), v: data.todays.length, s: '' },
-    { icon: Inbox, label: tr('New requests', 'طلبات جديدة'), v: newReq.length, s: '' },
+    { icon: Inbox, label: tr('New leads', 'عملاء جدد'), v: newReq.length, s: '' },
     { icon: Armchair, label: tr('Chair occupancy', 'إشغال الكراسي'), v: data.occupancy, s: '%' },
     { icon: Wallet, label: tr('Collected this month', 'المحصّل الشهر ده'), v: Math.round(data.revenue / 1000), s: 'K' },
   ]
@@ -110,14 +122,14 @@ export default function Overview() {
           </div>
           <ul className="mt-4 divide-y divide-deep/5">
             {data.todays.map((a) => {
-              const d = doc(a.doctorId)
+              const d = doc(a.doctor_id)
               return (
                 <li key={a.id} className="flex items-center gap-4 py-3">
-                  <span className="font-display w-14 text-sm font-semibold text-deep tabular-nums" dir="ltr">{a.time}</span>
+                  <span className="font-display w-20 text-sm font-semibold text-deep tabular-nums" dir="ltr">{a.from_time} <span className="text-[0.65rem] font-normal text-stone">{a.from_time_type}</span></span>
                   <span className="h-9 w-1 rounded-full" style={{ background: d?.color }} />
                   <div className="min-w-0 flex-1">
-                    <Link to={`/dashboard/patients/${a.patientId}`} className="block truncate text-sm font-medium text-charcoal hover:text-emerald">{pName(a.patientId)}</Link>
-                    <p className="truncate text-xs text-stone">{sName(a.serviceId)} · {d ? pick(d.name) : ''} · {tr('Chair', 'كرسي')} {a.chair}</p>
+                    <Link to={`/dashboard/patients/${a.patient_id}`} className="block truncate text-sm font-medium text-charcoal hover:text-emerald">{pName(a.patient_id)}</Link>
+                    <p className="truncate text-xs text-stone">{a.service_ids.map(sName).join(' + ')} · {d ? doctorName(d, lang) : ''} · {chairName(a.resource_id)}</p>
                   </div>
                   <ApptBadge s={a.status} />
                 </li>
@@ -128,13 +140,13 @@ export default function Overview() {
         <div className="space-y-4">
           <Card>
             <div className="flex items-center justify-between">
-              <h2 className="font-display text-lg font-semibold text-deep">{tr('New booking requests', 'طلبات حجز جديدة')}</h2>
-              <Link to="/dashboard/requests" className="text-xs text-emerald hover:text-deep">{tr('Inbox', 'الوارد')} →</Link>
+              <h2 className="font-display text-lg font-semibold text-deep">{tr('New leads', 'عملاء محتملين جدد')}</h2>
+              <Link to="/dashboard/leads" className="text-xs text-emerald hover:text-deep">{tr('Inbox', 'الوارد')} →</Link>
             </div>
             <ul className="mt-3 space-y-2">
               {newReq.slice(0, 4).map((r) => (
                 <li key={r.id} className="flex items-center justify-between gap-3 rounded-xl bg-ivory px-3 py-2.5">
-                  <div className="min-w-0"><p className="truncate text-sm font-medium text-charcoal">{r.name}</p><p className="truncate text-xs text-stone">{sName(r.serviceId)} · {fmtDate(r.date, lang)} {r.time}</p></div>
+                  <div className="min-w-0"><p className="truncate text-sm font-medium text-charcoal">{r.name}</p><p className="truncate text-xs text-stone">{r.service_id ? sName(r.service_id) : r.subject} · {r.form_name}</p></div>
                   <ReqBadge s={r.status} />
                 </li>
               ))}
@@ -144,10 +156,10 @@ export default function Overview() {
           <Card>
             <h2 className="font-display flex items-center gap-2 text-lg font-semibold text-deep"><FileClock className="size-4 text-emerald" />{tr('Plans awaiting approval', 'خطط مستنية موافقة')}</h2>
             <ul className="mt-3 space-y-2">
-              {data.pendingPlans.slice(0, 5).map((p) => (
-                <li key={p.id}><Link to={`/dashboard/patients/${p.id}`} className="flex items-center justify-between rounded-xl px-3 py-2 text-sm hover:bg-ivory">
-                  <span className="text-charcoal">{p.name}</span>
-                  <span className="text-xs tabular-nums text-stone">{money(p.plan.reduce((s, i) => s + i.cost, 0), lang)}</span>
+              {data.pendingPlans.slice(0, 5).map((x) => (
+                <li key={x.id}><Link to={`/dashboard/patients/${x.patient_id}`} className="flex items-center justify-between rounded-xl px-3 py-2 text-sm hover:bg-ivory">
+                  <span className="text-charcoal">{pName(x.patient_id)} <span className="text-xs text-stone">{x.reference}</span></span>
+                  <span className="text-xs tabular-nums text-stone">{money(optionTotal(x), lang)}</span>
                 </Link></li>
               ))}
             </ul>

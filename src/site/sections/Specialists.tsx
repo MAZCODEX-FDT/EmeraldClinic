@@ -3,23 +3,30 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
 import { Mark } from '@/components/brand/Logo'
 import { useLang, useL } from '@/lib/i18n'
-import { useDB, type Doctor } from '@/lib/store'
+import { useDB, doctorName, type Doctor } from '@/lib/store'
 import { gsap, useGSAP } from '@/lib/gsap'
 
 function Photo({ d, className = '' }: { d: Doctor; className?: string }) {
-  return d.photo ? (
-    <img src={d.photo} alt={d.name.en} className={`h-full w-full object-cover object-top fade-b ${className}`} />
+  return d.user.profile_image ? (
+    <img src={d.user.profile_image} alt={d.user.full_name} className={`h-full w-full object-cover object-top fade-b ${className}`} />
   ) : (
-    <div className={`grid h-full w-full place-items-center bg-mist ${className}`}><span className="font-display text-6xl text-deep/40">{d.initials}</span></div>
+    <div className={`grid h-full w-full place-items-center bg-mist ${className}`}><span className="font-display text-6xl text-deep/40">{d.user.full_name.replace('Dr. ', '').split(' ').map((x) => x[0]).join('')}</span></div>
   )
+}
+
+/** Localised specialisations of a doctor (MazMed doctor ↔ specializations). */
+function useRole(d: Doctor) {
+  const { l } = useLang()
+  const specs = useDB((x) => x.specializations)
+  return specs.filter((s) => d.specialization_ids.includes(s.id)).map((s) => l(s, 'name')).join(' · ')
 }
 
 /** Specialists carousel: colour centre, grayscale neighbours (after the "Meet Our Specialists" reference). */
 export function Specialists({ compact = false }: { compact?: boolean }) {
-  const { pick, lang } = useLang()
+  const { lang } = useLang()
   const L = useL()
   const all = useDB((d) => d.doctors)
-  const docs = useMemo(() => all.filter((d) => d.visible), [all])
+  const docs = useMemo(() => all.filter((d) => d.show_on_website).sort((a, b) => a.sort_order - b.sort_order), [all])
   const [i, setI] = useState(0)
   const root = useRef<HTMLElement>(null)
   const n = docs.length
@@ -48,13 +55,13 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
           </div>
         </div>
 
-        <div className="relative mt-8 grid grid-cols-[1fr_1.6fr_1fr] items-end gap-4 md:gap-10">
-          {[prev, cur, next].map((d, k) => {
-            const center = k === 1
+        <div className={`relative mt-8 grid items-end gap-4 md:gap-10 ${n >= 3 ? 'grid-cols-[1fr_1.6fr_1fr]' : n === 2 ? 'mx-auto max-w-4xl grid-cols-[1fr_1.6fr]' : 'mx-auto max-w-md grid-cols-1'}`}>
+          {(n >= 3 ? [prev, cur, next] : n === 2 ? [next, cur] : [cur]).map((d, k, arr) => {
+            const center = d.id === cur.id && (arr.length !== 3 || k === 1)
             return (
               <button key={d.id + k} onClick={() => !center && go(k === 0 ? -1 : 1)} data-center={center || undefined} data-side={!center || undefined}
-                className={`relative flex flex-col ${center ? 'cursor-default' : 'cursor-pointer'}`} aria-label={pick(d.name)}>
-                {!center && <p className="mb-4 hidden border-s-2 border-charcoal ps-3 text-start text-xs font-semibold tracking-wide text-charcoal uppercase md:block">{pick(d.name)}</p>}
+                className={`relative flex flex-col ${center ? 'cursor-default' : 'cursor-pointer'}`} aria-label={doctorName(d, lang)}>
+                {!center && <p className="mb-4 hidden border-s-2 border-charcoal ps-3 text-start text-xs font-semibold tracking-wide text-charcoal uppercase md:block">{doctorName(d, lang)}</p>}
                 <div className={`relative ${center ? 'aspect-[3/4]' : 'aspect-[3/4] scale-[0.86] grayscale transition-all duration-700 hover:grayscale-0'}`}>
                   {center && <div className="absolute inset-[8%] -z-0 rounded-full bg-jade/70 blur-3xl" />}
                   <div className="relative h-full"><Photo d={d} /></div>
@@ -70,9 +77,9 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
             <span className="absolute inset-y-0 start-0 w-3 rounded-s-md border-y-[3px] border-s-[3px] border-emerald" />
             <span className="absolute inset-y-0 end-0 w-3 rounded-e-md border-y-[3px] border-e-[3px] border-emerald" />
             <span className="text-start">
-              <span className="block text-sm font-semibold tracking-wide text-charcoal uppercase">{pick(cur.name)}</span>
-              <span className="block font-mono text-[0.7rem] text-stone">{pick(cur.role)}</span>
-              <span className="block font-mono text-[0.7rem] text-stone">{cur.years}+ {L('years experience', 'سنة خبرة')}</span>
+              <span className="block text-sm font-semibold tracking-wide text-charcoal uppercase">{doctorName(cur, lang)}</span>
+              <span className="block font-mono text-[0.7rem] text-stone">{useRole(cur)}</span>
+              <span className="block font-mono text-[0.7rem] text-stone">{cur.experience}+ {L('years experience', 'سنة خبرة')}</span>
             </span>
             <ArrowUpRight className="size-6 text-charcoal transition-transform group-hover:rotate-45 rtl:-scale-x-100" />
           </Link>
@@ -85,20 +92,20 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
 }
 
 /** Grid card used on /doctors and treatment pages. */
-export function DoctorPhotoCard({ d }: { d: Doctor }) {
-  const { pick } = useLang()
+export function DoctorPhotoCard({ d, serviceId }: { d: Doctor; serviceId?: number }) {
+  const { lang } = useLang()
   const L = useL()
   return (
-    <Link to={`/book?doctor=${d.id}`} className="group block overflow-hidden rounded-[2rem] bg-[#FBFBFA] transition-shadow hover:shadow-[0_30px_60px_-30px_rgba(14,77,60,.35)]">
+    <Link to={`/book?doctor=${d.id}${serviceId ? `&service=${serviceId}` : ''}`} className="group block overflow-hidden rounded-[2rem] bg-[#FBFBFA] transition-shadow hover:shadow-[0_30px_60px_-30px_rgba(14,77,60,.35)]">
       <div className="relative aspect-[3/4] overflow-hidden">
         <div className="absolute inset-[15%] rounded-full bg-jade/0 blur-3xl transition-colors duration-700 group-hover:bg-jade/70" />
         <div className="relative h-full grayscale transition-all duration-700 group-hover:scale-[1.03] group-hover:grayscale-0"><Photo d={d} /></div>
       </div>
       <div className="flex items-end justify-between gap-4 p-6">
         <div>
-          <p className="text-sm font-semibold tracking-wide text-charcoal uppercase">{pick(d.name)}</p>
-          <p className="mt-1 text-xs text-stone">{pick(d.role)}</p>
-          <p className="mt-0.5 text-xs text-stone">{d.years}+ {L('years experience', 'سنة خبرة')}</p>
+          <p className="text-sm font-semibold tracking-wide text-charcoal uppercase">{doctorName(d, lang)}</p>
+          <p className="mt-1 text-xs text-stone">{useRole(d)}</p>
+          <p className="mt-0.5 text-xs text-stone">{d.experience}+ {L('years experience', 'سنة خبرة')}</p>
         </div>
         <span className="grid size-11 shrink-0 place-items-center rounded-full bg-deep text-ivory transition-transform group-hover:rotate-45"><ArrowUpRight className="size-4 rtl:-scale-x-100" /></span>
       </div>

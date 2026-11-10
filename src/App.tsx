@@ -5,8 +5,10 @@ import { Mark } from '@/components/brand/Logo'
 import { SiteLayout } from '@/site/SiteLayout'
 import Home from '@/site/pages/Home'
 
-const Services = lazy(() => import('@/site/pages/Services'))
-const ServiceDetail = lazy(() => import('@/site/pages/ServiceDetail'))
+const Treatments = lazy(() => import('@/site/pages/Treatments'))
+const TreatmentDetail = lazy(() => import('@/site/pages/TreatmentDetail'))
+const Visit = lazy(() => import('@/site/pages/Visit'))
+const Contact = lazy(() => import('@/site/pages/Contact'))
 const DoctorsPage = lazy(() => import('@/site/pages/DoctorsPage'))
 const Book = lazy(() => import('@/site/pages/Book'))
 const Login = lazy(() => import('@/dashboard/Login'))
@@ -38,8 +40,11 @@ export default function App() {
           <Routes>
             <Route element={<SiteLayout />}>
               <Route index element={<Home />} />
-              <Route path="services" element={<Services />} />
-              <Route path="services/:slug" element={<ServiceDetail />} />
+              <Route path="treatments" element={<Treatments />} />
+              <Route path="treatments/:slug" element={<TreatmentDetail />} />
+              <Route path="services" element={<Navigate to="/treatments" replace />} />
+              <Route path="visit" element={<Visit />} />
+              <Route path="contact" element={<Contact />} />
               <Route path="doctors" element={<DoctorsPage />} />
               <Route path="book" element={<Book />} />
             </Route>
@@ -50,7 +55,8 @@ export default function App() {
               <Route path="appointments" element={<Appointments />} />
               <Route path="patients" element={<Patients />} />
               <Route path="patients/:id" element={<PatientDetail />} />
-              <Route path="requests" element={<Requests />} />
+              <Route path="leads" element={<Requests />} />
+              <Route path="requests" element={<Navigate to="/dashboard/leads" replace />} />
               <Route path="services" element={<ServicesAdmin />} />
               <Route path="doctors" element={<DoctorsAdmin />} />
               <Route path="reviews" element={<ReviewsAdmin />} />

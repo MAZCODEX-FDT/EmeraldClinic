@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { DentalArch, type ToothGeo, type ToothType } from '@/components/dental/DentalArch'
 import { useLang } from '@/lib/i18n'
 import { gsap, useGSAP } from '@/lib/gsap'
-import { SectionHead } from './ServicesBento'
+import { SectionHead } from './SectionHead'
 
 const toService: Record<ToothType, string> = { front: 'smile-design-veneers', premolar: 'tooth-coloured-fillings', molar: 'root-canal', wisdom: 'wisdom-tooth' }
 
@@ -47,7 +47,7 @@ export function ToothExplorer() {
                 <p className="eyebrow text-emerald">{lang === 'ar' ? 'سنة رقم' : 'Tooth'} {sel.fdi}</p>
                 <h3 className="font-display mt-3 text-2xl font-semibold text-deep">{info.t}</h3>
                 <p className="mt-3 leading-relaxed text-charcoal/70">{info.b}</p>
-                <Link to={`/services/${toService[sel.type]}`} className="group mt-5 inline-flex items-center gap-2 text-sm font-medium text-emerald hover:text-deep">
+                <Link to={`/treatments/${toService[sel.type]}`} className="group mt-5 inline-flex items-center gap-2 text-sm font-medium text-emerald hover:text-deep">
                   {t.services.more}<ArrowUpRight className="size-4 transition-transform group-hover:rotate-45 rtl:-scale-x-100" />
                 </Link>
               </>

@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { content, type Content } from '@/content/site'
+import { loc } from '@/lib/store'
 
 export type Lang = 'en' | 'ar'
 export type Bi = { en: string; ar: string }
 
-type Ctx = { lang: Lang; dir: 'ltr' | 'rtl'; t: Content; setLang: (l: Lang) => void; toggle: () => void; pick: (b: Bi) => string }
+type Ctx = { lang: Lang; dir: 'ltr' | 'rtl'; t: Content; setLang: (l: Lang) => void; toggle: () => void; pick: (b: Bi) => string; l: (row: object, key: string) => string }
 const LangCtx = createContext<Ctx | null>(null)
 
 const KEY = 'emerald.lang'
@@ -23,6 +24,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     lang, dir, t: content[lang], setLang,
     toggle: () => setLang(lang === 'ar' ? 'en' : 'ar'),
     pick: (b) => b[lang],
+    l: (row, key) => loc(row, key, lang),
   }
   return <LangCtx.Provider value={value}>{children}</LangCtx.Provider>
 }

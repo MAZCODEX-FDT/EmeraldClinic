@@ -40,11 +40,11 @@ export function HeroLight() {
     : [{ t: 'WE TRY TO', c: 'text-emerald' }, { t: 'SAVE YOUR', c: 'text-charcoal' }, { t: 'TOOTH.', c: 'text-charcoal' }]
 
   const arches: { img?: string; title?: string; sub: string; stat?: number; suffix?: string; to?: string }[] = [
-    { img: '/img/aligner-cut.webp', title: L('Clear Aligners', 'التقويم الشفاف'), sub: L('Straighter, quietly', 'تقويم مش باين'), to: '/services/clear-aligners' },
+    { img: '/img/aligner-cut.webp', title: L('Clear Aligners', 'التقويم الشفاف'), sub: L('Straighter, quietly', 'تقويم مش باين'), to: '/treatments/clear-aligners' },
     { stat: 4, title: '', sub: L('Specialist doctors', 'دكاترة متخصصين') },
-    { img: '/img/implant-cut.webp', title: L('Dental Implants', 'زراعة الأسنان'), sub: L('Only when needed', 'بس لما يكون لازم'), to: '/services/dental-implants' },
+    { img: '/img/implant-cut.webp', title: L('Dental Implants', 'زراعة الأسنان'), sub: L('Only when needed', 'بس لما يكون لازم'), to: '/treatments/dental-implants' },
     { stat: 100, suffix: '%', title: '', sub: L('Plans written first', 'خطط مكتوبة الأول') },
-    { img: '/img/tooth-cut.webp', title: L('Root Canal', 'علاج العصب'), sub: L('Keep your own tooth', 'حافظ على سنتك'), to: '/services/root-canal' },
+    { img: '/img/tooth-cut.webp', title: L('Root Canal', 'علاج العصب'), sub: L('Keep your own tooth', 'حافظ على سنتك'), to: '/treatments/root-canal' },
   ]
 
   return (
@@ -81,7 +81,7 @@ export function HeroLight() {
             </div>
           </div>
           <div data-fade className="mt-8 hidden lg:block">
-            <Magnet padding={50} magnetStrength={4}><PillCta to="/services">{L('Explore our treatments', 'اكتشف العلاجات')}</PillCta></Magnet>
+            <Magnet padding={50} magnetStrength={4}><PillCta to="/treatments">{L('Explore our treatments', 'اكتشف العلاجات')}</PillCta></Magnet>
           </div>
         </div>
 
