@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { LangProvider } from '@/lib/i18n'
 import { Mark } from '@/components/brand/Logo'
 import { SiteLayout } from '@/site/SiteLayout'
@@ -27,10 +27,13 @@ function Loader() {
   return <div className="grid min-h-screen place-items-center bg-ivory"><Mark size={56} className="animate-pulse" /></div>
 }
 
+// Hash routing for static hosts without SPA rewrites (e.g. the Claude-hosted preview)
+const Router = import.meta.env.VITE_HASH_ROUTER ? HashRouter : BrowserRouter
+
 export default function App() {
   return (
     <LangProvider>
-      <BrowserRouter>
+      <Router>
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route element={<SiteLayout />}>
@@ -57,7 +60,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
-      </BrowserRouter>
+      </Router>
     </LangProvider>
   )
 }

@@ -3,8 +3,17 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import path from 'node:path'
 
+// For relative-path builds (ARTIFACT=1) rewrite absolute /img/ references so images load from any sub-path
+const relativeImages = {
+  name: 'relative-images',
+  transform(code: string, id: string) {
+    if (!process.env.ARTIFACT || !/\/src\/.*\.(t|j)sx?$/.test(id)) return
+    return code.replace(/(['"`])\/img\//g, '$1./img/')
+  },
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), relativeImages],
   resolve: { alias: { '@': path.resolve(__dirname, 'src') } },
   build: {
     chunkSizeWarningLimit: 700,
