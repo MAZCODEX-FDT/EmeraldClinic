@@ -14,7 +14,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const lenis = useLenis(({ scroll }) => setScrolled(scroll > 40))
-  const darkHero = pathname === '/' && !scrolled
+  const darkHero = false
 
   useEffect(() => { setOpen(false) }, [pathname])
   useEffect(() => { if (open) lenis?.stop(); else lenis?.start() }, [open, lenis])

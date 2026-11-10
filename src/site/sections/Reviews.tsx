@@ -15,7 +15,7 @@ export function Reviews() {
   const svc = (id?: string) => { const s = services.find((x) => x.id === id); return s ? pick(s.name) : '' }
 
   return (
-    <section id="reviews" className="overflow-hidden bg-beige/50 px-6 py-28 md:py-36">
+    <section id="reviews" className="overflow-hidden bg-cloud px-6 py-28 md:py-36">
       <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[1fr_1.1fr]">
         <div>
           <SectionHead eyebrow={t.reviews.eyebrow} title={t.reviews.title} />

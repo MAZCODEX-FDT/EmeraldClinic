@@ -56,7 +56,7 @@ export default function Book() {
   const doc = doctors.find((d) => d.id === doctorId)
 
   return (
-    <section className="min-h-screen bg-ivory px-6 pt-36 pb-24">
+    <section className="min-h-screen bg-[#FBFBFA] px-6 pt-36 pb-24">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_22rem]">
         <div ref={panel}>
           {done ? (
@@ -99,7 +99,7 @@ export default function Book() {
                     </button>
                     {docs.map((d) => (
                       <button data-anim key={d.id} onClick={() => { setDoctor(d.id); setStep(2) }} className={`flex items-center gap-4 rounded-2xl border p-4 text-start transition-all ${doctorId === d.id ? 'border-deep bg-deep text-ivory' : 'border-deep/10 bg-white hover:border-emerald'}`}>
-                        <span className="font-display grid size-12 shrink-0 place-items-center rounded-full text-ivory" style={{ background: d.color }}>{d.initials}</span>
+                        {d.photo ? <img src={d.photo} alt="" className="size-12 shrink-0 rounded-full bg-mist object-cover object-top" /> : <span className="font-display grid size-12 shrink-0 place-items-center rounded-full text-ivory" style={{ background: d.color }}>{d.initials}</span>}
                         <span><span className="font-display block font-semibold">{pick(d.name)}</span><span className={`text-xs ${doctorId === d.id ? 'text-jade' : 'text-stone'}`}>{pick(d.role)}</span></span>
                       </button>
                     ))}

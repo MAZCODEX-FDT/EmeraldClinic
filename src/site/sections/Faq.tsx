@@ -24,7 +24,7 @@ export function Faq() {
   const { t } = useLang()
   const [open, setOpen] = useState(0)
   return (
-    <section className="bg-ivory px-6 py-28 md:py-36">
+    <section className="bg-white px-6 py-28 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_1.4fr]">
         <div className="self-start lg:sticky lg:top-32"><SectionHead eyebrow={t.faq.eyebrow} title={t.faq.title} /></div>
         <div>{t.faq.items.map((f, i) => <Item key={i} q={f.q} a={f.a} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />)}</div>

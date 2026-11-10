@@ -10,7 +10,7 @@ export type Service = {
 }
 export type Doctor = {
   id: string; name: Bi; role: Bi; bio: Bi; initials: string
-  services: string[]; days: number[]; color: string; visible: boolean; years: number
+  services: string[]; days: number[]; color: string; visible: boolean; years: number; photo?: string
 }
 export type ToothState = 'healthy' | 'caries' | 'filling' | 'rootcanal' | 'crown' | 'implant' | 'missing' | 'watch'
 export type PlanStatus = 'planned' | 'in-progress' | 'done'
@@ -43,7 +43,7 @@ export type DB = {
 }
 
 const KEY = 'emerald.db'
-const VERSION = 5
+const VERSION = 7
 
 function load(): DB {
   try {

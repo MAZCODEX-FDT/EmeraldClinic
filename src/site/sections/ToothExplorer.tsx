@@ -31,7 +31,7 @@ export function ToothExplorer() {
   ]
 
   return (
-    <section ref={root} className="relative overflow-hidden bg-beige/50 px-6 py-28 md:py-36">
+    <section ref={root} className="relative overflow-hidden bg-cloud px-6 py-28 md:py-36">
       <div className="mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
         <div>
           <SectionHead eyebrow={t.explorer.eyebrow} title={t.explorer.title} />

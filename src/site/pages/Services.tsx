@@ -27,7 +27,7 @@ export default function Services() {
           ))}
         </div>
       </PageHero>
-      <section className="bg-ivory px-6 pb-28">
+      <section className="bg-[#FBFBFA] px-6 pb-28">
         <div ref={grid} className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 lg:grid-cols-3">
           {list.map((s, i) => (
             <Link data-card key={s.id} to={`/services/${s.slug}`} className="block">

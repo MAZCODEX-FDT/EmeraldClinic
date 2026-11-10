@@ -11,6 +11,8 @@
   --color-charcoal: #2B2F2E;
   --color-ivory: #F7F4EE;
   --color-glow: #125A47;
+  --color-mist: #EAF1ED;
+  --color-cloud: #F4F6F4;
 
   --font-display: "Outfit", "Almarai", system-ui, sans-serif;
   --font-sans: "Inter", "Tajawal", system-ui, sans-serif;
@@ -21,7 +23,7 @@
 }
 
 @layer base {
-  html { background: var(--color-ivory); color: var(--color-charcoal); -webkit-font-smoothing: antialiased; }
+  html { background: #FBFBFA; color: var(--color-charcoal); -webkit-font-smoothing: antialiased; }
   body { font-family: var(--font-sans); }
   html[dir="rtl"] body { font-family: var(--font-ar); }
   html[dir="rtl"] .font-display { font-family: var(--font-ar-display); letter-spacing: 0 !important; }
@@ -74,3 +76,12 @@ html[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
 }
 
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@utility arch { border-radius: 999px 999px 1.75rem 1.75rem; }
+@utility fade-portrait {
+  -webkit-mask-image: radial-gradient(75% 70% at 50% 42%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(75% 70% at 50% 42%, #000 55%, transparent 100%);
+}
+@utility fade-b { -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
+@utility thin { font-weight: 250; }
+html[dir="rtl"] .thin { font-weight: 300; }

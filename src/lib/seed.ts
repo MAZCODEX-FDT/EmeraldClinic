@@ -182,28 +182,28 @@ export const services: Service[] = [
 // Placeholder doctors — names, bios and photos to be replaced with the clinic's real team.
 export const doctors: Doctor[] = [
   {
-    id: 'd-1', initials: 'YM', color: '#0E4D3C', years: 14, visible: true, days: [6, 0, 1, 2, 3],
+    id: 'd-1', photo: '/img/dr-youssef-cut.webp', initials: 'YM', color: '#0E4D3C', years: 14, visible: true, days: [6, 0, 1, 2, 3],
     name: { en: 'Dr. Youssef Mansour', ar: 'د. يوسف منصور' },
     role: { en: 'Founder · Endodontics & Restorative', ar: 'المؤسس · علاج الجذور والترميم' },
     bio: { en: 'Believes the best tooth is the one you were born with. Leads every treatment-planning meeting.', ar: 'مؤمن إن أحسن سنة هي اللي اتولدت بيها. بيقود كل اجتماعات تخطيط العلاج.' },
     services: ['s-rootcanal', 's-filling', 's-crown', 's-checkup'],
   },
   {
-    id: 'd-2', initials: 'NH', color: '#1F7A5C', years: 9, visible: true, days: [6, 1, 3, 4],
+    id: 'd-2', photo: '/img/dr-nour-cut.webp', initials: 'NH', color: '#1F7A5C', years: 9, visible: true, days: [6, 1, 3, 4],
     name: { en: 'Dr. Nour El-Hady', ar: 'د. نور الهادي' },
     role: { en: 'Cosmetic Dentistry & Smile Design', ar: 'تجميل الأسنان وتصميم الابتسامة' },
     bio: { en: 'Designs smiles that look like you on a good day — never like a filter.', ar: 'بتصمم ابتسامات شبهك في أحلى يوم — مش شبه فلتر.' },
     services: ['s-veneers', 's-whitening', 's-crown', 's-filling'],
   },
   {
-    id: 'd-3', initials: 'KS', color: '#125A47', years: 12, visible: true, days: [0, 2, 4],
+    id: 'd-3', photo: '/img/dr-karim-cut.webp', initials: 'KS', color: '#125A47', years: 12, visible: true, days: [0, 2, 4],
     name: { en: 'Dr. Karim Saleh', ar: 'د. كريم صالح' },
     role: { en: 'Oral Surgery & Implantology', ar: 'جراحة الفم والزراعة' },
     bio: { en: 'Plans every implant in 3D first, and only places one when saving the tooth is no longer possible.', ar: 'بيخطط كل زراعة 3D الأول، وبيزرع بس لما إنقاذ السنة يبقى مش ممكن.' },
     services: ['s-implant', 's-wisdom'],
   },
   {
-    id: 'd-4', initials: 'LA', color: '#2B2F2E', years: 7, visible: true, days: [6, 0, 1, 3],
+    id: 'd-4', photo: '/img/dr-laila-cut.webp', initials: 'LA', color: '#2B2F2E', years: 7, visible: true, days: [6, 0, 1, 3],
     name: { en: 'Dr. Laila Adel', ar: 'د. ليلى عادل' },
     role: { en: 'Orthodontics & Pediatric', ar: 'تقويم وأسنان أطفال' },
     bio: { en: 'Turns first visits into good memories, and aligner plans into steady progress.', ar: 'بتخلي أول زيارة ذكرى حلوة، وخطة التقويم تقدّم ثابت.' },

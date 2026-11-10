@@ -18,7 +18,7 @@ export function WrittenPlan() {
   const marked: Record<number, string> = { 36: '#1F7A5C', 25: '#BFE3D3' }
 
   return (
-    <section className="bg-ivory">
+    <section className="bg-white">
       <ContainerScroll
         title={
           <>

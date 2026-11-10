@@ -25,7 +25,7 @@ export default function DoctorsAdmin() {
           return (
             <Card key={d.id}>
               <div className="flex items-start gap-4">
-                <span className="font-display grid size-16 shrink-0 place-items-center rounded-2xl text-xl text-ivory" style={{ background: `linear-gradient(160deg, ${d.color}, #093629)` }}>{d.initials}</span>
+                {d.photo ? <img src={d.photo} alt="" className="size-16 shrink-0 rounded-2xl bg-mist object-cover object-top" /> : <span className="font-display grid size-16 shrink-0 place-items-center rounded-2xl text-xl text-ivory" style={{ background: `linear-gradient(160deg, ${d.color}, #093629)` }}>{d.initials}</span>}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <div><p className="font-display text-lg font-semibold text-deep">{pick(d.name) || '—'}</p><p className="text-sm text-stone">{pick(d.role)}</p></div>

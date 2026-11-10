@@ -8,8 +8,8 @@ export function Cta() {
   const { t, lang } = useLang()
   const wa = useDB((d) => d.settings.whatsapp)
   return (
-    <section className="bg-ivory px-6 pb-24">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-jade/50 px-8 py-20 text-center md:py-28">
+    <section className="bg-white px-6 pb-24">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-mist px-8 py-20 text-center md:py-28">
         <div className="absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-ivory/60 blur-3xl" />
         <div className="relative">
           <h2 className="font-display text-4xl font-semibold tracking-[-0.02em] text-deep md:text-7xl">

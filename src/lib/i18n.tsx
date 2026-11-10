@@ -32,3 +32,9 @@ export function useLang() {
   if (!c) throw new Error('useLang outside provider')
   return c
 }
+
+/** Inline bilingual helper: L('English', 'عربي') */
+export function useL() {
+  const { lang } = useLang()
+  return (en: string, ar: string) => (lang === 'ar' ? ar : en)
+}

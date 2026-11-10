@@ -1,11 +1,12 @@
-import { Hero } from '../sections/Hero'
-import { Pillars } from '../sections/Pillars'
-import { ServicesBento } from '../sections/ServicesBento'
+import { HeroLight } from '../sections/HeroLight'
+import { Statement } from '../sections/Statement'
+import { TreatmentSlider } from '../sections/TreatmentSlider'
+import { ProcessCards } from '../sections/ProcessCards'
+import { JourneySteps } from '../sections/JourneySteps'
+import { ImplantOrbit } from '../sections/ImplantOrbit'
 import { ToothExplorer } from '../sections/ToothExplorer'
-import { Journey } from '../sections/Journey'
 import { WrittenPlan } from '../sections/WrittenPlan'
-import { Stats } from '../sections/Stats'
-import { Doctors } from '../sections/Doctors'
+import { Specialists } from '../sections/Specialists'
 import { Reviews } from '../sections/Reviews'
 import { Faq } from '../sections/Faq'
 import { Cta } from '../sections/Cta'
@@ -13,14 +14,15 @@ import { Cta } from '../sections/Cta'
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Pillars />
-      <ServicesBento />
+      <HeroLight />
+      <Statement />
+      <TreatmentSlider />
+      <ProcessCards />
+      <JourneySteps />
+      <ImplantOrbit />
       <ToothExplorer />
-      <Journey />
       <WrittenPlan />
-      <Stats />
-      <Doctors />
+      <Specialists />
       <Reviews />
       <Faq />
       <Cta />

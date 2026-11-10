@@ -7,8 +7,13 @@ import { useLang } from '@/lib/i18n'
 import { useDB } from '@/lib/store'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { PageHero } from './PageHero'
-import { DoctorCard } from '../sections/Doctors'
+import { DoctorPhotoCard } from '../sections/Specialists'
 import { Cta } from '../sections/Cta'
+
+const HERO_IMG: Record<string, string> = {
+  's-rootcanal': '/img/tooth-cut.webp', 's-implant': '/img/implant-cut.webp', 's-aligners': '/img/aligner-life.webp', 's-crown': '/img/crown.webp',
+  's-checkup': '/img/scan.webp', 's-veneers': '/img/smile.webp', 's-whitening': '/img/hero-cut.webp', 's-kids': '/img/kids.webp', 's-filling': '/img/tooth-cut.webp', 's-wisdom': '/img/tooth-cut.webp',
+}
 
 export default function ServiceDetail() {
   const { slug } = useParams()
@@ -27,10 +32,10 @@ export default function ServiceDetail() {
 
   return (
     <div ref={root}>
-      <PageHero eyebrow={t.categories[s.category]} title={pick(s.name)} sub={pick(s.short)}>
+      <PageHero eyebrow={t.categories[s.category]} title={pick(s.name)} sub={pick(s.short)} image={HERO_IMG[s.id]}>
         <Link to="/services" className="mt-8 inline-flex items-center gap-2 text-sm text-emerald hover:text-deep"><ArrowLeft className="size-4 rtl:-scale-x-100" />{t.services.all}</Link>
       </PageHero>
-      <section className="bg-ivory px-6 pb-24">
+      <section className="bg-[#FBFBFA] px-6 pb-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.3fr_1fr]">
           <div>
             <p className="font-display text-2xl leading-relaxed text-deep md:text-3xl md:leading-relaxed">{pick(s.long)}</p>
@@ -72,10 +77,10 @@ export default function ServiceDetail() {
         </div>
       </section>
       {docs.length > 0 && (
-        <section className="bg-beige/50 px-6 py-24">
+        <section className="bg-cloud px-6 py-24">
           <div className="mx-auto max-w-7xl">
             <h2 className="font-display text-3xl font-semibold text-deep md:text-4xl">{t.services.related}</h2>
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{docs.map((d) => <DoctorCard key={d.id} d={d} />)}</div>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{docs.map((d) => <DoctorPhotoCard key={d.id} d={d} />)}</div>
           </div>
         </section>
       )}
