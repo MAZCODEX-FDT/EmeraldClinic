@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import Silk from '@/components/reactbits/Silk'
-import CircularText from '@/components/reactbits/CircularText'
 import CountUp from '@/components/reactbits/CountUp'
 import Magnet from '@/components/reactbits/Magnet'
 import { Mark } from '@/components/brand/Logo'
@@ -32,7 +31,6 @@ export function HeroLight() {
       .from('[data-portrait]', { scale: 1.08, opacity: 0, duration: 1.8, ease: 'expo.out' }, 0)
       .fromTo('[data-arch]', { y: 120, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 1.2 }, 0.45)
       .from('[data-fade]', { y: 20, opacity: 0, stagger: 0.08 }, 0.6)
-      .from('[data-badge]', { scale: 0, rotate: -90, duration: 1.4, ease: 'back.out(1.6)' }, 0.9)
     gsap.to('[data-portrait]', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true } })
     gsap.to('[data-arch-img]', { y: -14, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.3 })
   }, { scope: root, dependencies: [lang], revertOnUpdate: true })
@@ -84,14 +82,6 @@ export function HeroLight() {
           </div>
           <div data-fade className="mt-8 hidden lg:block">
             <Magnet padding={50} magnetStrength={4}><PillCta to="/services">{L('Explore our treatments', 'اكتشف العلاجات')}</PillCta></Magnet>
-          </div>
-        </div>
-
-        {/* rotating badge */}
-        <div data-badge className="absolute end-[6%] top-[50%] hidden lg:block xl:end-[20%]" dir="ltr">
-          <div className="relative grid size-36 place-items-center rounded-full bg-emerald shadow-[0_20px_50px_-15px_rgba(31,122,92,.6)]">
-            <CircularText text={L('YOUR PLAN · WRITTEN FIRST · ', 'YOUR PLAN · WRITTEN FIRST · ')} spinDuration={22} size={136} fontSize={11} color="#F7F4EE" letterSpacing={3} />
-            <Mark size={38} tooth="#F7F4EE" smile="#BFE3D3" className="absolute" />
           </div>
         </div>
 
