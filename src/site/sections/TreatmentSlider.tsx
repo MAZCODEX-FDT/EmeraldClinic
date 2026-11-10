@@ -41,7 +41,7 @@ export function TreatmentSlider() {
         <PillCta to="/book" className="self-start !py-1.5 !ps-5 md:self-auto">{L('Consultation', 'استشارة')}</PillCta>
       </div>
 
-      <div ref={track} className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 [scrollbar-width:none] md:px-10 [&::-webkit-scrollbar]:hidden" data-lenis-prevent-horizontal>
+      <div ref={track} className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 [scrollbar-width:none] md:px-10 [&::-webkit-scrollbar]:hidden">
         {list.map((s) => {
           const ph = PHOTO[s.id]
           return (
