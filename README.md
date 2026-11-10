@@ -10,8 +10,14 @@ A bilingual (Arabic RTL / English) clinic website plus a full clinic dashboard, 
 - **21st.dev-inspired components**, rebuilt in the brand palette (the registry can't be reached from the build environment): Container Scroll Animation (@manuarora700), Background Paths (@kokonutd), Display Cards (@Codehagen), Bento Grid and Sidebar (@manuarora700)
 - Recharts for the dashboard charts, lucide-react for icons, plus a custom monoline dental icon set that matches the logo
 
+## Design (v2, Nov 2026)
+The site follows a light, airy premium look based on the client's references: rounded hero panel with a soft Silk background, mixed thin and bold uppercase type, arch-shaped cards with 3D renders, a rotating "Your plan · written first" badge, a treatment slider, technology cards, a pinned step-by-step journey, an implant scene with orbiting labels and a specialists carousel. Colours stay on the Emerald palette.
+
+### Images
+All photos and 3D renders in `public/img` are **AI-generated placeholders** (made in Canva, design "Emerald website image assets"). That includes the four doctor portraits, which also show invented name tags on their coats. Replace them with the clinic's real photography before launch. Files ending in `-cut.webp` have transparent backgrounds.
+
 ## Website (`/`)
-Home sections: hero, key-message marquee, manifesto, treatments bento, **interactive tooth explorer** (FDI arch), pinned "your visit" journey, **written plan** showcase, stats, flip-card doctors, reviews, FAQ, CTA and footer.
+Home sections: hero, statement with floating tooth, treatments slider, technology cards, pinned journey, implant orbit, **interactive tooth explorer** (FDI arch), **written plan** showcase, specialists carousel, reviews, FAQ, CTA and footer.
 Other pages: `/services`, `/services/:slug`, `/doctors`, and `/book`, a 4-step booking flow that sends requests straight into the dashboard.
 Brand rules applied: no prices, offers or guaranteed results on the public site; the voice is calm Egyptian Arabic.
 
