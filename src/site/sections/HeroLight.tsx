@@ -66,7 +66,7 @@ export function HeroLight() {
 
         <div className="absolute inset-x-0 top-0 mx-auto max-w-[88rem] px-5 pt-28 md:px-10 lg:pt-[18vh]">
           <div className="flex items-start justify-between gap-8">
-            <h1 className={`${lang === 'ar' ? 'font-ar-display text-[3.4rem] leading-[1.1] md:text-[5.6rem]' : 'font-display text-[3.3rem] leading-[0.95] tracking-[-0.03em] md:text-[6.2rem]'} font-bold`}>
+            <h1 className={`${lang === 'ar' ? 'font-ar-display text-[3.4rem] leading-[1.1] md:text-[5.6rem]' : 'font-display text-[3.3rem] leading-[0.95] tracking-[-0.03em] md:text-[5rem] xl:text-[5.4rem]'} font-bold`}>
               {lines.map((l, i) => (
                 <span key={i} data-line className="block overflow-hidden pb-1"><span className={`block ${l.c}`}>{l.t}</span></span>
               ))}
