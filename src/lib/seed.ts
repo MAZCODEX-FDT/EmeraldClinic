@@ -51,7 +51,7 @@ export const services: Service[] = [
   },
   {
     id: 's-rootcanal', slug: 'root-canal', icon: 'rootcanal', category: 'restorative', duration: 75, price: 3500, visible: true,
-    name: { en: 'Root Canal Treatment', ar: 'علاج عصب (Root Canal)' },
+    name: { en: 'Root Canal Treatment', ar: 'علاج عصب (Root Canal)\u200F' },
     short: { en: 'Microscope-guided endodontics so we can save the tooth, not pull it.', ar: 'علاج عصب بالميكروسكوب علشان نحافظ على السنة بدل ما نخلعها.' },
     long: {
       en: 'Saving your natural tooth is always our first option. With rotary files, apex locators and magnification, most root canals are done in one or two comfortable visits.',
@@ -115,7 +115,7 @@ export const services: Service[] = [
   },
   {
     id: 's-veneers', slug: 'smile-design-veneers', icon: 'veneer', category: 'cosmetic', duration: 90, price: 6000, visible: true,
-    name: { en: 'Smile Design & Veneers', ar: 'تصميم الابتسامة (Veneers)' },
+    name: { en: 'Smile Design & Veneers', ar: 'تصميم الابتسامة (Veneers)\u200F' },
     short: { en: 'Digital smile design with a mock-up you can see before anything is touched.', ar: 'تصميم ابتسامة ديجيتال وMock-up تشوفه قبل ما نلمس أي سنة.' },
     long: {
       en: 'We design your smile on screen, try it in your mouth as a temporary mock-up, and only then prepare minimal-thickness veneers.',

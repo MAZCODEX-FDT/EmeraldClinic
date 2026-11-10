@@ -43,7 +43,7 @@ export type DB = {
 }
 
 const KEY = 'emerald.db'
-const VERSION = 4
+const VERSION = 5
 
 function load(): DB {
   try {
