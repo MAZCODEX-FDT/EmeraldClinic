@@ -15,11 +15,12 @@ function Photo({ d, className = '' }: { d: Doctor; className?: string }) {
 }
 
 /** Localised specialisations of a doctor (MazMed doctor ↔ specializations). */
-function useRole(d: Doctor) {
+function useRoleOf(d: Doctor | undefined) {
   const { l } = useLang()
   const specs = useDB((x) => x.specializations)
-  return specs.filter((s) => d.specialization_ids.includes(s.id)).map((s) => l(s, 'name')).join(' · ')
+  return d ? specs.filter((s) => d.specialization_ids.includes(s.id)).map((s) => l(s, 'name')).join(' · ') : ''
 }
+const useRole = (d: Doctor) => useRoleOf(d)
 
 /** Specialists carousel: colour centre, grayscale neighbours (after the "Meet Our Specialists" reference). */
 export function Specialists({ compact = false }: { compact?: boolean }) {
@@ -38,8 +39,10 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
     gsap.fromTo('[data-name]', { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, delay: 0.15 })
   }, { scope: root, dependencies: [i] })
 
-  if (!n) return null
-  const cur = at(i), prev = at(i - 1), next = at(i + 1)
+  const cur = n ? at(i) : undefined
+  const role = useRoleOf(cur)
+  if (!n || !cur) return null
+  const prev = at(i - 1), next = at(i + 1)
   const go = (d: number) => setI((v) => v + d)
 
   return (
@@ -59,7 +62,7 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
           {(n >= 3 ? [prev, cur, next] : n === 2 ? [next, cur] : [cur]).map((d, k, arr) => {
             const center = d.id === cur.id && (arr.length !== 3 || k === 1)
             return (
-              <button key={d.id + k} onClick={() => !center && go(k === 0 ? -1 : 1)} data-center={center || undefined} data-side={!center || undefined}
+              <button key={`${center ? 'c' : 's'}-${d.id}-${k}`} onClick={() => !center && go(k === 0 ? -1 : 1)} data-center={center || undefined} data-side={!center || undefined}
                 className={`relative flex flex-col ${center ? 'cursor-default' : 'cursor-pointer'}`} aria-label={doctorName(d, lang)}>
                 {!center && <p className="mb-4 hidden border-s-2 border-charcoal ps-3 text-start text-xs font-semibold tracking-wide text-charcoal uppercase md:block">{doctorName(d, lang)}</p>}
                 <div className={`relative ${center ? 'aspect-[3/4]' : 'aspect-[3/4] scale-[0.86] grayscale transition-all duration-700 hover:grayscale-0'}`}>
@@ -78,7 +81,7 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
             <span className="absolute inset-y-0 end-0 w-3 rounded-e-md border-y-[3px] border-e-[3px] border-emerald" />
             <span className="text-start">
               <span className="block text-sm font-semibold tracking-wide text-charcoal uppercase">{doctorName(cur, lang)}</span>
-              <span className="block font-mono text-[0.7rem] text-stone">{useRole(cur)}</span>
+              <span className="block font-mono text-[0.7rem] text-stone">{role}</span>
               <span className="block font-mono text-[0.7rem] text-stone">{cur.experience}+ {L('years experience', 'سنة خبرة')}</span>
             </span>
             <ArrowUpRight className="size-6 text-charcoal transition-transform group-hover:rotate-45 rtl:-scale-x-100" />
