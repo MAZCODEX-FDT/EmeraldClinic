@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --color-deep: #0E4D3C;
+  --color-deeper: #093629;
+  --color-emerald: #1F7A5C;
+  --color-jade: #BFE3D3;
+  --color-beige: #E9DFCF;
+  --color-stone: #8C8F8D;
+  --color-charcoal: #2B2F2E;
+  --color-ivory: #F7F4EE;
+  --color-glow: #125A47;
+
+  --font-display: "Outfit", "Almarai", system-ui, sans-serif;
+  --font-sans: "Inter", "Tajawal", system-ui, sans-serif;
+  --font-ar-display: "Almarai", system-ui, sans-serif;
+  --font-ar: "Tajawal", system-ui, sans-serif;
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html { background: var(--color-ivory); color: var(--color-charcoal); -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--font-sans); }
+  html[dir="rtl"] body { font-family: var(--font-ar); }
+  html[dir="rtl"] .font-display { font-family: var(--font-ar-display); letter-spacing: 0 !important; }
+  ::selection { background: var(--color-jade); color: var(--color-deep); }
+  button { cursor: pointer; }
+  main { overflow-x: clip; }
+  body { overflow-x: clip; }
+}
+
+@utility glow-bg {
+  background:
+    radial-gradient(120% 80% at 80% 0%, rgba(191, 227, 211, 0.18), transparent 60%),
+    linear-gradient(160deg, #125A47 0%, #0E4D3C 45%, #093629 100%);
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility card-dash {
+  background: white;
+  border: 1px solid rgb(14 77 60 / 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 0 rgb(14 77 60 / 0.04), 0 12px 32px -18px rgb(14 77 60 / 0.25);
+}
+
+html[dir="rtl"] .eyebrow { letter-spacing: 0; font-size: 0.85rem; }
+html[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
