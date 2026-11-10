@@ -7,11 +7,12 @@ import { useDB } from '@/lib/store'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { PillCta } from './HeroLight'
 
-const PHOTO: Record<number, { img: string; tags: { en: string; ar: string }[] }> = {
-  8: { img: '/img/aligner-life.webp', tags: [{ en: 'Invisible', ar: 'مش باين' }, { en: 'Removable', ar: 'بيتشال' }, { en: 'Comfort fit', ar: 'مريح' }] },
-  9: { img: '/img/kids.webp', tags: [{ en: 'Gentle', ar: 'هادي' }, { en: 'No fear', ar: 'من غير خوف' }] },
-  7: { img: '/img/smile.webp', tags: [{ en: 'Mock-up first', ar: 'Mock-up الأول' }, { en: 'Natural', ar: 'طبيعي' }] },
-  5: { img: '/img/implant-jaw.webp', tags: [{ en: '3D planned', ar: 'متخطط 3D' }, { en: 'Guided', ar: 'بدليل جراحي' }] },
+// Photos by kind of treatment (MazMed's own service ids differ per clinic).
+const PHOTO: Record<string, { img: string; tags: { en: string; ar: string }[] }> = {
+  aligner: { img: '/img/aligner-life.webp', tags: [{ en: 'Invisible', ar: 'مش باين' }, { en: 'Removable', ar: 'بيتشال' }, { en: 'Comfort fit', ar: 'مريح' }] },
+  kids: { img: '/img/kids.webp', tags: [{ en: 'Gentle', ar: 'هادي' }, { en: 'No fear', ar: 'من غير خوف' }] },
+  veneer: { img: '/img/smile.webp', tags: [{ en: 'Mock-up first', ar: 'Mock-up الأول' }, { en: 'Natural', ar: 'طبيعي' }] },
+  implant: { img: '/img/implant-jaw.webp', tags: [{ en: '3D planned', ar: 'متخطط 3D' }, { en: 'Guided', ar: 'بدليل جراحي' }] },
 }
 
 export function TreatmentSlider() {
@@ -43,7 +44,7 @@ export function TreatmentSlider() {
 
       <div ref={track} className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 [scrollbar-width:none] md:px-10 [&::-webkit-scrollbar]:hidden">
         {list.map((s) => {
-          const ph = PHOTO[s.id]
+          const ph = PHOTO[s.icon]
           return (
             <Link data-tcard key={s.id} to={`/treatments/${s.slug}`} className="group relative flex h-[26rem] w-[19rem] shrink-0 snap-start flex-col overflow-hidden rounded-[1.75rem] bg-mist transition-colors hover:bg-jade/50 md:w-[21rem]">
               {ph ? (

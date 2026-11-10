@@ -10,11 +10,13 @@
  *   site and dashboard behave the way they will once connected.
  */
 import { db, nextId, todayISO, type DB } from '../store'
+import { isLive, csrfToken } from './live'
 import type { BookingPayload, BookingResult, Doctor, RequestPayload } from './types'
 import { egyptE164, fromMinutes, parseSlot, slotOf, toMinutes } from './time'
 
-export const mazmedUrl = () => (db.get().settings.mazmed_url || import.meta.env.VITE_MAZMED_URL || '').replace(/\/$/, '')
-export const isRemote = () => !!mazmedUrl()
+/** '' (same domain) when MazMed serves this site; otherwise the URL set in Settings or VITE_MAZMED_URL. */
+export const mazmedUrl = () => isLive ? '' : (db.get().settings.mazmed_url || import.meta.env.VITE_MAZMED_URL || '').replace(/\/$/, '')
+export const isRemote = () => isLive || !!mazmedUrl()
 
 /* ---------- local engine (mirrors AppointmentBooker::freeSlots) ---------- */
 
@@ -115,7 +117,11 @@ async function post(path: string, body: Record<string, unknown>) {
     if (Array.isArray(v)) v.forEach((x) => fd.append(`${k}[]`, String(x)))
     else fd.append(k, typeof v === 'boolean' ? (v ? '1' : '0') : String(v))
   }
-  const res = await fetch(mazmedUrl() + path, { method: 'POST', body: fd, credentials: 'include', headers: { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' } })
+  // On the clinic's own domain the page carries MazMed's CSRF token; the session cookie goes with it.
+  if (isLive) fd.append('_token', csrfToken())
+  const headers: Record<string, string> = { Accept: 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+  if (isLive) headers['X-CSRF-TOKEN'] = csrfToken()
+  const res = await fetch(mazmedUrl() + path, { method: 'POST', body: fd, credentials: isLive ? 'same-origin' : 'include', headers })
   const json = await res.json().catch(() => ({}))
   if (!res.ok || json.ok === false) {
     const first = json.errors ? (Object.values(json.errors).flat()[0] as string) : undefined
@@ -133,7 +139,7 @@ export const mazmed = {
     args.services.forEach((s) => q.append('services[]', String(s)))
     if (args.branch_id) q.append('branch_id', String(args.branch_id))
     try {
-      const res = await fetch(`${mazmedUrl()}/site/booking/slots?${q}`, { headers: { Accept: 'application/json' }, credentials: 'include' })
+      const res = await fetch(`${mazmedUrl()}/site/booking/slots?${q}`, { headers: { Accept: 'application/json' }, credentials: isLive ? 'same-origin' : 'include' })
       return ((await res.json()).slots as string[]) || []
     } catch { return [] }
   },

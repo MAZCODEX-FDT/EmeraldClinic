@@ -18,7 +18,7 @@ export default function Visit() {
   const services = useDB((d) => d.services)
   const reviews = useDB((d) => d.reviews)
   const faqs = useDB((d) => d.faqs)
-  const checkup = services.find((s) => s.id === 1)
+  const checkup = services.find((s) => s.icon === 'checkup') ?? services[0]
   const quote = useMemo(() => reviews.find((r) => r.is_published && /[؀-ۿ]/.test(r.review) === (lang === 'ar') && r.rating === 5), [reviews, lang])
   const [open, setOpen] = useState(0)
   const root = useRef<HTMLDivElement>(null)

@@ -7,13 +7,19 @@ import { useDB, money } from '@/lib/store'
 export function WrittenPlan() {
   const { t, lang, l } = useLang()
   const services = useDB((d) => d.services)
-  const row = (id: number) => services.find((s) => s.id === id)!
+  // A sample plan built from the clinic's own services (whatever MazMed lists), by kind of treatment.
+  const used = new Set<number>()
+  const row = (icon: string) => {
+    const s = services.find((x) => x.icon === icon && !used.has(x.id)) ?? services.find((x) => !used.has(x.id))
+    if (s) used.add(s.id)
+    return s
+  }
   const rows = [
-    { tooth: 36, s: row(3), visits: lang === 'ar' ? '٢' : '2' },
-    { tooth: 36, s: row(4), visits: lang === 'ar' ? '٢' : '2' },
-    { tooth: 25, s: row(2), visits: lang === 'ar' ? '١' : '1' },
-    { tooth: 0, s: row(1), visits: lang === 'ar' ? '١' : '1' },
-  ]
+    { tooth: 36, s: row('rootcanal'), visits: lang === 'ar' ? '٢' : '2' },
+    { tooth: 36, s: row('crown'), visits: lang === 'ar' ? '٢' : '2' },
+    { tooth: 25, s: row('filling'), visits: lang === 'ar' ? '١' : '1' },
+    { tooth: 0, s: row('checkup'), visits: lang === 'ar' ? '١' : '1' },
+  ].filter((r): r is { tooth: number; s: NonNullable<typeof r.s>; visits: string } => !!r.s)
   const total = rows.reduce((a, r) => a + r.s.charges, 0)
   const marked: Record<number, string> = { 36: '#1F7A5C', 25: '#BFE3D3' }
 

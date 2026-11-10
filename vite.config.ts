@@ -3,12 +3,14 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import path from 'node:path'
 
-// For relative-path builds (ARTIFACT=1) rewrite absolute /img/ references so images load from any sub-path
+// Absolute /img/ references in the code follow the build's base path:
+// ARTIFACT=1 (relative build, GitHub Pages) → ./img/, MAZMED=1 (served by MazMed under /_site/) → /_site/img/
+const imagesPrefix = process.env.MAZMED ? '/_site/img/' : process.env.ARTIFACT ? './img/' : null
 const relativeImages = {
   name: 'relative-images',
   transform(code: string, id: string) {
-    if (!process.env.ARTIFACT || !/\/src\/.*\.(t|j)sx?$/.test(id)) return
-    return code.replace(/(['"`])\/img\//g, '$1./img/')
+    if (!imagesPrefix || !/\/src\/.*\.(t|j)sx?$/.test(id)) return
+    return code.replace(/(['"`])\/img\//g, `$1${imagesPrefix}`)
   },
 }
 

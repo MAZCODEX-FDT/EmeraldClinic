@@ -23,32 +23,28 @@ Pages:
 - `/treatments`: every service with a category filter. `/treatments/:slug` gives each treatment its own page (description, before your visit, aftercare, FAQs, related treatments, doctors who offer it).
 - `/visit`: the first-visit page, built to reassure and lead into a booking.
 - `/contact`: branch details, a map and a message form (sent to MazMed as an appointment request).
-- `/doctors`.
+- `/our-doctors`.
 - `/book`: the **MazMed booking wizard**. It has the same 4 steps and fields as MazMed: services, doctor, time, details.
 
 The site starts with **two doctors**, Dr. Youssef Mansour and Dr. Nour El-Hady. Their names, bios and photos are placeholders.
 
 ## MazMed integration
-All data shapes in `src/lib/mazmed/types.ts` mirror MazMed's models and use the same field names:
-- Service, ServiceCategory, Doctor with WeekDay hours and session gap, Branch, ClinicResource.
-- Patient, Appointment, Enquiry, Review, DentalChartEntry with ToothConditions, TreatmentPlan with options and items, Invoice with payments.
+The site is built to run **inside MazMed, on the clinic's own domain**. MazMed serves it in place of its default website, and the clinic's own domain also carries sign-in (`/login`), the clinic app and, if the clinic has it, the patient portal (`/patient`).
 
-`src/lib/mazmed/client.ts` talks to MazMed's public website endpoints:
+How it works:
+- **Data.** MazMed writes the clinic's live data into the page as `window.__MAZMED__`: doctors on the website, with their hours and session gap; services and categories; specialisations; branches; FAQs; published reviews; which modules are on; and route addresses. The site reads it in `src/lib/mazmed/live.ts`. Nothing is stored in the browser in this mode.
+- **Forms.** Bookings and contact messages post to MazMed's own routes on the same domain (`/site/booking/slots`, `/site/booking`, `/site/appointment`), using the page's CSRF token. There's no API key and no CORS setup.
+- **Header.** It shows **Login** (`/login`) and, when the patient portal is on, **My account** (`/patient`).
+- **Dashboard.** The demo dashboard is left out, because MazMed is the dashboard.
+- **Doctors page.** It lives at `/our-doctors`, since `/doctors` is MazMed's doctor app.
 
-| Website action | MazMed endpoint |
-|---|---|
-| Available times | `GET /site/booking/slots?doctor_id&date&services[]&branch_id` |
-| Online booking | `POST /site/booking` (name, phone, email, gender, dob, doctor_id, date, slot, services[], branch_id, create_account, password, notes, coupon, consent, honeypot `website`, `form_started_at`) |
-| Contact / request form | `POST /site/appointment` |
+**To publish an update:**
+1. Run `npm run build:mazmed`. It builds with the base path `/_site/` and writes `emerald-site-mazmed.zip`.
+2. In MazMed's platform admin, go to **Clinic domains**, open the clinic's domain, choose **Custom website**, and upload the zip.
 
-**To connect:** open Dashboard → Settings → MazMed connection, paste the clinic's MazMed URL, then click *Test connection*. You can set the URL at build time instead with `VITE_MAZMED_URL`. Without a URL, the site uses a local engine that follows the same rules as MazMed:
-- Slot length = the sum of the service times, rounded up to the doctor's session gap.
-- No overlaps, and nothing within 60 minutes from now.
-- Patients are matched by Egyptian E.164 phone number.
+Uploading it again replaces the site. **Show default website** switches the domain back to MazMed's own website without deleting the upload.
 
-**MazMed must allow the website origin** for those three routes, otherwise the browser blocks the requests:
-- CORS: `allowed_origins` includes the website domain, with `supports_credentials`.
-- CSRF: exempt `site/booking` and `site/appointment` in `VerifyCsrfToken`, or serve the site from the same domain.
+Off MazMed, for example on GitHub Pages, the site uses its demo data, and the demo dashboard at `/dashboard` stays available. In that mode, a MazMed URL can still be set in Settings to send bookings to a MazMed instance from another domain. That needs CORS and a CSRF exemption on the MazMed side.
 
 ## Dashboard (`/dashboard`)
 Demo login: `admin@emeralddental.eg` / `emerald2026`. Every module follows MazMed's statuses and fields:

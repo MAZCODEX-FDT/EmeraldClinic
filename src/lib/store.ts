@@ -4,6 +4,7 @@ import type {
   Enquiry, Review, DentalChartEntry, TreatmentPlan, Invoice, SiteSettings,
 } from './mazmed/types'
 import { seed } from './seed'
+import { page, liveTables } from './mazmed/live'
 
 export * from './mazmed/types'
 
@@ -21,6 +22,8 @@ const KEY = 'emerald.db'
 const VERSION = 10
 
 function load(): DB {
+  // Served by MazMed: the clinic's real doctors, services and branches, nothing kept in the browser.
+  if (page) return { ...seed(VERSION), ...liveTables(page) }
   try {
     const raw = localStorage.getItem(KEY)
     if (raw) {
@@ -33,7 +36,7 @@ function load(): DB {
 
 let state: DB = load()
 const listeners = new Set<() => void>()
-const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(state)) } catch { /* quota / private */ } }
+const persist = () => { if (page) return; try { localStorage.setItem(KEY, JSON.stringify(state)) } catch { /* quota / private */ } }
 
 export const db = {
   get: () => state,
@@ -47,7 +50,7 @@ export const db = {
   reset() { state = seed(VERSION); persist(); listeners.forEach((l) => l()) },
   subscribe(l: () => void) {
     listeners.add(l)
-    const onStorage = (e: StorageEvent) => { if (e.key === KEY) { state = load(); l() } }
+    const onStorage = (e: StorageEvent) => { if (!page && e.key === KEY) { state = load(); l() } }
     window.addEventListener('storage', onStorage)
     return () => { listeners.delete(l); window.removeEventListener('storage', onStorage) }
   },

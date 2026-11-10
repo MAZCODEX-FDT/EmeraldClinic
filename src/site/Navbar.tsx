@@ -1,11 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { Menu, X, ArrowUpRight, LogIn, UserRound } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { Logo } from '@/components/brand/Logo'
 import Magnet from '@/components/reactbits/Magnet'
 import { useLang } from '@/lib/i18n'
 import { gsap, useGSAP } from '@/lib/gsap'
+import { page } from '@/lib/mazmed/live'
+
+/**
+ * Sign-in and the patient portal. On the clinic's own domain these are MazMed's pages there
+ * (full page loads, not site routes); on the demo, sign-in opens the demo dashboard.
+ */
+const LOGIN = page ? page.routes.login : null
+const PORTAL = page?.routes.portal ?? null
+
+function AccountLinks({ className, light }: { className?: string; light?: boolean }) {
+  const { lang } = useLang()
+  const ar = lang === 'ar'
+  const cls = `inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm transition-colors ${light ? 'text-jade hover:text-ivory' : 'text-charcoal/70 hover:text-deep'}`
+  return (
+    <div className={`items-center ${className ?? ''}`}>
+      {PORTAL && <a href={PORTAL} className={cls}><UserRound className="size-4" />{ar ? 'حسابي' : 'My account'}</a>}
+      {LOGIN ? <a href={LOGIN} className={cls}><LogIn className="size-4 rtl:-scale-x-100" />{ar ? 'دخول' : 'Login'}</a>
+        : <Link to="/dashboard/login" className={cls}><LogIn className="size-4 rtl:-scale-x-100" />{ar ? 'دخول' : 'Login'}</Link>}
+    </div>
+  )
+}
 
 export function Navbar() {
   const { t, toggle } = useLang()
@@ -26,7 +47,7 @@ export function Navbar() {
 
   const links = [
     { to: '/treatments', label: t.nav.services },
-    { to: '/doctors', label: t.nav.doctors },
+    { to: '/our-doctors', label: t.nav.doctors },
     { to: '/visit', label: t.nav.journey },
     { to: '/contact', label: t.nav.contact },
   ]
@@ -45,6 +66,7 @@ export function Navbar() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
+            <AccountLinks className="hidden md:flex" light={darkHero} />
             <button onClick={toggle} className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${darkHero ? 'text-jade hover:text-ivory' : 'text-emerald hover:text-deep'}`}>{t.nav.lang}</button>
             <div className="hidden sm:block"><Magnet padding={40} magnetStrength={3}>
               <Link to="/book" className={`group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${darkHero ? 'bg-ivory text-deep hover:bg-jade' : 'bg-deep text-ivory hover:bg-emerald'}`}>
@@ -71,7 +93,7 @@ export function Navbar() {
           </nav>
           <div className="mt-auto flex items-center justify-between text-sm text-jade">
             <button onClick={toggle}>{t.nav.lang}</button>
-            <Link to="/dashboard">{t.nav.dashboard}</Link>
+            <AccountLinks className="flex" light />
           </div>
         </div>
       )}

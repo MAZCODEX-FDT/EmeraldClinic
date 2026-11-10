@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, HashRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { isLive } from '@/lib/mazmed/live'
 import { LangProvider } from '@/lib/i18n'
 import { Mark } from '@/components/brand/Logo'
 import { SiteLayout } from '@/site/SiteLayout'
@@ -45,9 +46,13 @@ export default function App() {
               <Route path="services" element={<Navigate to="/treatments" replace />} />
               <Route path="visit" element={<Visit />} />
               <Route path="contact" element={<Contact />} />
-              <Route path="doctors" element={<DoctorsPage />} />
+              {/* /doctors is MazMed's doctor app on the clinic's own domain, so the site's page lives at /our-doctors. */}
+              <Route path="our-doctors" element={<DoctorsPage />} />
+              <Route path="doctors" element={<Navigate to="/our-doctors" replace />} />
               <Route path="book" element={<Book />} />
             </Route>
+            {/* The demo dashboard only exists off MazMed; on the clinic's domain MazMed is the dashboard. */}
+            {!isLive && <>
             <Route path="dashboard/login" element={<Login />} />
             <Route path="dashboard/patients/:id/plan" element={<PlanPrint />} />
             <Route path="dashboard" element={<DashLayout />}>
@@ -63,6 +68,7 @@ export default function App() {
               <Route path="finance" element={<Finance />} />
               <Route path="settings" element={<Settings />} />
             </Route>
+            </>}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>

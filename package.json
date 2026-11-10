@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "build:preview": "ARTIFACT=1 VITE_HASH_ROUTER=1 vite build --base ./ --outDir dist-preview"
+    "build:preview": "ARTIFACT=1 VITE_HASH_ROUTER=1 vite build --base ./ --outDir dist-preview",
+    "build:mazmed": "tsc -b && MAZMED=1 vite build --base /_site/ --outDir dist-mazmed && rm -f emerald-site-mazmed.zip && cd dist-mazmed && zip -qr ../emerald-site-mazmed.zip . -x '.*'"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
