@@ -56,8 +56,8 @@ export default function Visit() {
         <div data-promises className="mx-auto grid max-w-[88rem] gap-4 md:grid-cols-3">
           {[
             { icon: Ear, t: L('We listen first', 'بنسمعك الأول'), b: L('The first minutes are yours: what hurts, what worries you, what you hope for.', 'أول دقايق بتاعتك: إيه اللي بيوجعك، إيه اللي مقلقك، وإيه اللي نفسك فيه.') },
-            { icon: FileText, t: L('Nothing without a written plan', 'مفيش حاجة من غير خطة مكتوبة'), b: L('Options, visits and costs are written and handed to you. You decide at home, calmly.', 'الاختيارات والزيارات والتكاليف مكتوبة في إيدك. وتقرر في البيت براحتك.') },
-            { icon: Hand, t: L('Raise your hand, we stop', 'ارفع إيدك، بنوقف'), b: L('Anxious? Tell us. Longer appointments, gentle anaesthesia and a pause whenever you need it.', 'قلقان؟ قولنا. ميعاد أطول، بنج هادي، ووقفة وقت ما تحتاج.') },
+            { icon: FileText, t: L('Nothing without a written plan', 'مفيش حاجة من غير خطة مكتوبة'), b: L('Options, visits and costs are written and handed to you. You decide at home, in your own time.', 'الاختيارات والزيارات والتكاليف مكتوبة في إيدك. وتقرر في البيت براحتك.') },
+            { icon: Hand, t: L('Raise your hand, we stop', 'ارفع إيدك، بنوقف'), b: L('Anxious? Tell us. Longer appointments, gentle anaesthesia and a pause whenever you need it.', 'قلقان؟ قولنا. ميعاد أطول، بنج مريح، ووقفة وقت ما تحتاج.') },
           ].map((p) => (
             <div data-promise key={p.t} className="rounded-[2rem] bg-white p-8">
               <span className="grid size-14 place-items-center rounded-2xl bg-mist text-deep"><p.icon className="size-6" /></span>

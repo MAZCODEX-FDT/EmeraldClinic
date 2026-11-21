@@ -8,11 +8,12 @@ export type Bi = { en: string; ar: string }
 type Ctx = { lang: Lang; dir: 'ltr' | 'rtl'; t: Content; setLang: (l: Lang) => void; toggle: () => void; pick: (b: Bi) => string; l: (row: object, key: string) => string }
 const LangCtx = createContext<Ctx | null>(null)
 
-const KEY = 'emerald.lang'
+// v2: English is the default; the earlier key had Arabic saved for everyone by default.
+const KEY = 'emerald.lang.v2'
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(() => {
-    try { return (localStorage.getItem(KEY) as Lang) || 'ar' } catch { return 'ar' }
+    try { return (localStorage.getItem(KEY) as Lang) || 'en' } catch { return 'en' }
   })
   const dir = lang === 'ar' ? 'rtl' : 'ltr'
   useEffect(() => {

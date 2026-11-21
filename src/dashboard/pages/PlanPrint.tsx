@@ -60,7 +60,7 @@ export default function PlanPrint() {
             <p className="text-xs text-stone">{tr('Prepared for', 'مكتوبة لـ')}</p>
             <h1 className="font-display mt-1 text-3xl font-semibold text-deep">{p.name}</h1>
             <p className="mt-1 text-sm text-stone"><span dir="ltr">{p.phone}</span> · {p.patient_unique_id}</p>
-            <p className="font-display mt-6 max-w-sm text-lg leading-snug text-deep">{tr('Your plan, written first. Take it home and decide calmly.', 'خطتك مكتوبة قبل ما نبدأ. خدها البيت وقرر براحتك.')}</p>
+            <p className="font-display mt-6 max-w-sm text-lg leading-snug text-deep">{tr('Your plan, written first. Take it home and decide in your own time.', 'خطتك مكتوبة قبل ما نبدأ. خدها البيت وقرر براحتك.')}</p>
           </div>
           <DentalArch width={260} className="w-[52mm]" showNumbers={false}
             fill={(g) => (marked.has(g.fdi) ? '#1F7A5C' : toothLook(chart, g.fdi).missing ? 'transparent' : '#FFFFFF')}

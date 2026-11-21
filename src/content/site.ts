@@ -5,7 +5,7 @@ const en = {
     eyebrow: 'Emerald Dental Clinic · Nasr City',
     title: 'We try to save your tooth.',
     titleAccent: 'Your plan is written before we begin.',
-    sub: 'Calm, honest dentistry in Nasr City. No rushing, no surprises — just a clear plan, real options and a team that puts your comfort first.',
+    sub: 'Honest, gentle dentistry in Nasr City. No rushing, no surprises — just a clear plan, real options and a team that puts your comfort first.',
     cta: 'Book a visit',
     cta2: 'See treatments',
     badge: 'Your comfort comes first',
@@ -13,11 +13,11 @@ const en = {
   },
   pillars: [
     { k: '01', title: 'We try to save your tooth', body: 'Extraction is the last option, never the first. Root canals, fillings and crowns come before any implant talk.' },
-    { k: '02', title: 'Your plan, written first', body: 'Every step, every visit and every cost is on paper before we start — so you decide calmly, at home.' },
+    { k: '02', title: 'Your plan, written first', body: 'Every step, every visit and every cost is on paper before we start — so you can decide at home, without pressure.' },
     { k: '03', title: 'Your comfort comes first', body: 'Gentle anaesthesia, quiet rooms and time to ask questions. If you need a pause, we pause.' },
   ],
   manifesto: 'Good dentistry is quiet. It explains before it treats, keeps what can be kept, and never sells you more than you need.',
-  services: { eyebrow: 'Treatments', title: 'Everything your smile needs, under one calm roof.', more: 'Details', all: 'All treatments', duration: 'Chair time', sessions: 'Visits', steps: 'How it goes', min: 'min', book: 'Book this treatment', related: 'Doctors for this treatment' },
+  services: { eyebrow: 'Treatments', title: 'Everything your smile needs, under one roof.', more: 'Details', all: 'All treatments', duration: 'Chair time', sessions: 'Visits', steps: 'How it goes', min: 'min', book: 'Book this treatment', related: 'Doctors for this treatment' },
   categories: { all: 'All', preventive: 'Preventive', restorative: 'Restorative', cosmetic: 'Cosmetic', surgical: 'Surgical', ortho: 'Orthodontics', pediatric: 'Children' },
   explorer: { eyebrow: 'Tooth explorer', title: 'Point to where it hurts.', sub: 'Tap a tooth to see what we usually look for there — and how we would try to keep it.', front: 'Front teeth', premolar: 'Premolars', molar: 'Molars', wisdom: 'Wisdom teeth', hint: 'Tap any tooth' },
   toothInfo: {
@@ -29,22 +29,22 @@ const en = {
   journey: {
     eyebrow: 'Your visit, step by step', title: 'From the first hello to your written plan.',
     steps: [
-      { t: 'A calm conversation', b: 'We start by listening — what bothers you, what worries you, what you hope for.' },
+      { t: 'A real conversation', b: 'We start by listening — what bothers you, what worries you, what you hope for.' },
       { t: 'Digital exam', b: 'Low-dose digital X-rays and intra-oral photos you can see on screen with us.' },
       { t: 'Your written plan', b: 'Options, visits and costs — written and handed to you before anything begins.' },
       { t: 'Treatment, gently', b: 'Comfortable anaesthesia and a team that checks in with you at every step.' },
       { t: 'Aftercare', b: 'Clear written instructions and a follow-up call. We stay with you.' },
     ],
   },
-  plan: { eyebrow: 'Transparency', title: 'Your plan, written first.', sub: 'Every patient leaves the first visit with a written treatment plan — teeth, steps, visits and costs. No pressure to decide in the chair.', sample: 'Sample written plan', patient: 'Patient', tooth: 'Tooth', treatment: 'Treatment', visits: 'Visits', total: 'Estimated total', approved: 'Take it home · decide calmly' },
+  plan: { eyebrow: 'Transparency', title: 'Your plan, written first.', sub: 'Every patient leaves the first visit with a written treatment plan — teeth, steps, visits and costs. No pressure to decide in the chair.', sample: 'Sample written plan', patient: 'Patient', tooth: 'Tooth', treatment: 'Treatment', visits: 'Visits', total: 'Estimated total', approved: 'Take it home · decide in your own time' },
   stats: [
     { v: 100, s: '%', l: 'of plans written before treatment starts' },
-    { v: 10, s: '', l: 'treatments under one calm roof' },
+    { v: 10, s: '', l: 'treatments under one roof' },
     { v: 4, s: '', l: 'doctors, each in their own speciality' },
     { v: 3, s: '', l: 'treatment chairs — we never overbook' },
   ],
   doctors: { eyebrow: 'The team', title: 'Doctors who explain before they treat.', years: 'years of practice', book: 'Book with', placeholder: 'Photo coming soon' },
-  reviews: { eyebrow: 'Patients', title: 'Calm words from real visits.' },
+  reviews: { eyebrow: 'Patients', title: 'Kind words from real visits.' },
   faq: {
     eyebrow: 'Questions', title: 'Honest answers.',
     items: [
@@ -55,7 +55,7 @@ const en = {
       { q: 'What are your working hours?', a: 'Saturday to Thursday, 12 PM to 10 PM. Friday we rest.' },
     ],
   },
-  cta: { title: 'Ready when you are.', sub: 'Book a calm first visit. We will call you to confirm within working hours.', btn: 'Book a visit', wa: 'WhatsApp us' },
+  cta: { title: 'Ready when you are.', sub: 'Book your first visit. We will call you to confirm within working hours.', btn: 'Book a visit', wa: 'WhatsApp us' },
   booking: {
     eyebrow: 'Book a visit', title: 'Tell us a little, we will call you back.',
     steps: ['Treatment', 'Doctor', 'Time', 'Your details'],
@@ -65,7 +65,7 @@ const en = {
     doneT: 'Request received.', doneB: 'Thank you. Our team will call you within working hours to confirm your visit. Your comfort comes first — tell us if you need anything.',
     again: 'Back to home', friday: 'Closed on Fridays', required: 'Please fill your name and a valid mobile number.',
   },
-  footer: { tag: 'Calm, honest dentistry in Nasr City.', visit: 'Visit', hours: 'Hours', contact: 'Contact', follow: 'Follow', rights: 'All rights reserved.', made: 'Designed & built by MAZCODEX' },
+  footer: { tag: 'Honest, gentle dentistry in Nasr City.', visit: 'Visit', hours: 'Hours', contact: 'Contact', follow: 'Follow', rights: 'All rights reserved.', made: 'Designed & built by MAZCODEX' },
 }
 
 export type Content = typeof en
@@ -77,7 +77,7 @@ const ar: Content = {
     eyebrow: 'إميرالد لطب الأسنان · مدينة نصر',
     title: 'بنحاول نحافظ على سنتك.',
     titleAccent: 'وخطتك مكتوبة قبل ما نبدأ.',
-    sub: 'طب أسنان هادي وصريح في مدينة نصر. من غير استعجال ولا مفاجآت — خطة واضحة، اختيارات حقيقية، وفريق راحتك عنده أولًا.',
+    sub: 'طب أسنان صريح ومريح في مدينة نصر. من غير استعجال ولا مفاجآت — خطة واضحة، اختيارات حقيقية، وفريق راحتك عنده أولًا.',
     cta: 'احجز زيارة',
     cta2: 'شوف العلاجات',
     badge: 'راحتك أولًا',
@@ -86,10 +86,10 @@ const ar: Content = {
   pillars: [
     { k: '٠١', title: 'بنحاول نحافظ على سنتك', body: 'الخلع آخر اختيار مش أوله. العصب والحشو والكراون قبل أي كلام عن زراعة.' },
     { k: '٠٢', title: 'خطتك مكتوبة قبل ما نبدأ', body: 'كل خطوة وكل زيارة وكل تكلفة مكتوبة قبل ما نبدأ — علشان تقرر وانت مرتاح في بيتك.' },
-    { k: '٠٣', title: 'راحتك أولًا', body: 'بنج مريح، أوض هادية، ووقت كفاية لأسئلتك. لو محتاج تستريح، بنستنى.' },
+    { k: '٠٣', title: 'راحتك أولًا', body: 'بنج مريح، أوض مريحة، ووقت كفاية لأسئلتك. لو محتاج تستريح، بنستنى.' },
   ],
-  manifesto: 'طب الأسنان الكويس هادي. بيشرح قبل ما يعالج، بيحافظ على اللي ينفع يتحافظ عليه، وعمره ما يبيعلك أكتر من اللي محتاجه.',
-  services: { eyebrow: 'العلاجات', title: 'كل اللي ابتسامتك محتاجاه، في مكان واحد هادي.', more: 'التفاصيل', all: 'كل العلاجات', duration: 'مدة الجلسة', sessions: 'عدد الزيارات', steps: 'بتمشي إزاي', min: 'دقيقة', book: 'احجز العلاج ده', related: 'الأطباء المختصين' },
+  manifesto: 'طب الأسنان الكويس صريح. بيشرح قبل ما يعالج، بيحافظ على اللي ينفع يتحافظ عليه، وعمره ما يبيعلك أكتر من اللي محتاجه.',
+  services: { eyebrow: 'العلاجات', title: 'كل اللي ابتسامتك محتاجاه، في مكان واحد.', more: 'التفاصيل', all: 'كل العلاجات', duration: 'مدة الجلسة', sessions: 'عدد الزيارات', steps: 'بتمشي إزاي', min: 'دقيقة', book: 'احجز العلاج ده', related: 'الأطباء المختصين' },
   categories: { all: 'الكل', preventive: 'وقائي', restorative: 'ترميمي', cosmetic: 'تجميلي', surgical: 'جراحي', ortho: 'تقويم', pediatric: 'أطفال' },
   explorer: { eyebrow: 'استكشف سنانك', title: 'شاور على مكان الوجع.', sub: 'دوس على أي سنة وشوف إحنا عادةً بندور على إيه هناك — وإزاي بنحاول نحافظ عليها.', front: 'الأمامية', premolar: 'الضواحك', molar: 'الضروس', wisdom: 'ضروس العقل', hint: 'دوس على أي سنة' },
   toothInfo: {
@@ -101,33 +101,33 @@ const ar: Content = {
   journey: {
     eyebrow: 'زيارتك خطوة بخطوة', title: 'من أول سلام لحد خطتك المكتوبة.',
     steps: [
-      { t: 'كلام هادي', b: 'بنبدأ بالسماع — إيه اللي مضايقك، إيه اللي مقلقك، وإيه اللي نفسك فيه.' },
+      { t: 'كلام بجد', b: 'بنبدأ بالسماع — إيه اللي مضايقك، إيه اللي مقلقك، وإيه اللي نفسك فيه.' },
       { t: 'كشف ديجيتال', b: 'أشعة رقمية بجرعة قليلة وصور من جوه البق تشوفها معانا على الشاشة.' },
       { t: 'خطتك المكتوبة', b: 'الاختيارات والزيارات والتكلفة — مكتوبة في إيدك قبل أي حاجة.' },
-      { t: 'علاج بهدوء', b: 'بنج مريح وفريق بيطمّن عليك في كل خطوة.' },
+      { t: 'علاج مريح', b: 'بنج مريح وفريق بيطمّن عليك في كل خطوة.' },
       { t: 'متابعة', b: 'تعليمات مكتوبة واضحة ومكالمة متابعة. إحنا معاك.' },
     ],
   },
   plan: { eyebrow: 'شفافية', title: 'خطتك مكتوبة قبل ما نبدأ.', sub: 'كل مريض بيخرج من أول زيارة ومعاه خطة علاج مكتوبة — السنان، الخطوات، الزيارات والتكلفة. من غير ضغط إنك تقرر على الكرسي.', sample: 'نموذج خطة مكتوبة', patient: 'المريض', tooth: 'السنة', treatment: 'العلاج', visits: 'الزيارات', total: 'التكلفة التقديرية', approved: 'خدها البيت · وقرر براحتك' },
   stats: [
     { v: 100, s: '٪', l: 'من الخطط مكتوبة قبل بداية العلاج' },
-    { v: 10, s: '', l: 'علاجات في مكان واحد هادي' },
+    { v: 10, s: '', l: 'علاجات في مكان واحد' },
     { v: 4, s: '', l: 'دكاترة، كل واحد في تخصصه' },
     { v: 3, s: '', l: 'كراسي علاج — ومبنزحمش المواعيد' },
   ],
   doctors: { eyebrow: 'الفريق', title: 'دكاترة بيشرحوا قبل ما يعالجوا.', years: 'سنة خبرة', book: 'احجز مع', placeholder: 'الصورة قريبًا' },
-  reviews: { eyebrow: 'المرضى', title: 'كلام هادي من زيارات حقيقية.' },
+  reviews: { eyebrow: 'المرضى', title: 'كلام طيب من زيارات حقيقية.' },
   faq: {
     eyebrow: 'أسئلة', title: 'إجابات صريحة.',
     items: [
       { q: 'هتقولولي التكلفة قبل العلاج؟', a: 'أيوه. كل خطة مكتوب فيها التكلفة التقديرية قبل ما نبدأ، ومبتتغيرش غير بموافقتك.' },
       { q: 'هل دايمًا بتنصحوا بالزراعة؟', a: 'لأ. بنحاول نحافظ على سنتك الأول. الزراعة بنخطط لها بس لما الحفاظ على السنة يبقى مش ممكن فعلًا.' },
       { q: 'أنا بخاف من دكتور الأسنان. تقدروا تساعدوني؟', a: 'قولنا وانت بتحجز. بنخلي الميعاد أطول، ونشرح كل خطوة، ونوقف أول ما ترفع إيدك.' },
-      { q: 'بتعالجوا أطفال؟', a: 'أيوه — زيارات أولى هادية، سد شقوق، فلورايد، وتقييم تقويم مع د. ليلى.' },
+      { q: 'بتعالجوا أطفال؟', a: 'أيوه — زيارات أولى لطيفة، سد شقوق، فلورايد، وتقييم تقويم مع د. ليلى.' },
       { q: 'مواعيد العيادة إيه؟', a: 'من السبت للخميس، من ١٢ الظهر لـ ١٠ بالليل. الجمعة إجازة.' },
     ],
   },
-  cta: { title: 'جاهزين وقت ما تكون جاهز.', sub: 'احجز أول زيارة هادية. هنكلمك نأكد الميعاد في مواعيد العمل.', btn: 'احجز زيارة', wa: 'كلمنا واتساب' },
+  cta: { title: 'جاهزين وقت ما تكون جاهز.', sub: 'احجز أول زيارة. هنكلمك نأكد الميعاد في مواعيد العمل.', btn: 'احجز زيارة', wa: 'كلمنا واتساب' },
   booking: {
     eyebrow: 'احجز زيارة', title: 'قولنا شوية تفاصيل، وإحنا هنكلمك.',
     steps: ['العلاج', 'الدكتور', 'الميعاد', 'بياناتك'],
@@ -137,7 +137,7 @@ const ar: Content = {
     doneT: 'وصلنا طلبك.', doneB: 'شكرًا ليك. فريقنا هيكلمك في مواعيد العمل علشان يأكد زيارتك. راحتك أولًا — قولنا لو محتاج أي حاجة.',
     again: 'الرجوع للرئيسية', friday: 'الجمعة إجازة', required: 'من فضلك اكتب اسمك ورقم موبايل صحيح.',
   },
-  footer: { tag: 'طب أسنان هادي وصريح في مدينة نصر.', visit: 'العنوان', hours: 'المواعيد', contact: 'تواصل', follow: 'تابعنا', rights: 'جميع الحقوق محفوظة.', made: 'تصميم وتطوير MAZCODEX' },
+  footer: { tag: 'طب أسنان صريح ومريح في مدينة نصر.', visit: 'العنوان', hours: 'المواعيد', contact: 'تواصل', follow: 'تابعنا', rights: 'جميع الحقوق محفوظة.', made: 'تصميم وتطوير MAZCODEX' },
 }
 
 export const content = { en, ar }

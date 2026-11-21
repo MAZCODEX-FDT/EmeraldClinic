@@ -35,11 +35,11 @@ export const services: Service[] = [
   svc({
     id: 1, category_id: 1, slug: 'checkup-cleaning', icon: 'checkup', image: '/img/scan.webp', charges: 900, service_time: 45, is_featured: true,
     name: 'Check-up & Cleaning', name_ar: 'كشف وتنظيف جير',
-    short_description: 'A full digital exam, scaling and polishing — the calm start of every plan.', short_description_ar: 'كشف كامل بالأشعة الرقمية، تنظيف جير وتلميع — البداية الهادية لأي خطة.',
+    short_description: 'A full digital exam, scaling and polishing — the first step of every plan.', short_description_ar: 'كشف كامل بالأشعة الرقمية، تنظيف جير وتلميع — أول خطوة في أي خطة.',
     description: 'We look at every tooth, the gums and the bite, take low-dose digital X-rays when needed, then clean and polish. You leave with a clear picture of your mouth and a written list of what needs attention — and what does not.',
     description_ar: 'بنبص على كل سنة واللثة والـbite، وناخد أشعة رقمية بجرعة قليلة لو محتاجين، وبعدها تنظيف وتلميع. هتمشي وانت فاهم بقك كويس، ومعاك ورقة مكتوب فيها اللي محتاج متابعة — واللي مش محتاج.',
     preparation: 'Bring any old X-rays and a list of medicines you take. Eat normally before your visit.', preparation_ar: 'هات أي أشعة قديمة وقائمة بالأدوية اللي بتاخدها. كُل عادي قبل الزيارة.',
-    aftercare: 'Your gums may feel slightly sensitive for a day. Brush gently and avoid very cold drinks.', aftercare_ar: 'ممكن اللثة تكون حساسة شوية يوم واحد. افرش بهدوء وابعد عن المشروبات الساقعة جدًا.',
+    aftercare: 'Your gums may feel slightly sensitive for a day. Brush gently and avoid very cold drinks.', aftercare_ar: 'ممكن اللثة تكون حساسة شوية يوم واحد. افرش براحة وابعد عن المشروبات الساقعة جدًا.',
     faqs: [{ question: 'How often should I have a check-up?', question_ar: 'المفروض أكشف كل قد إيه؟', answer: 'Every six months for most people; we will tell you if you need it sooner.', answer_ar: 'كل ٦ شهور لأغلب الناس، وهنقولك لو محتاج أقرب من كده.' }],
     related_service_ids: [2, 6],
   }),
@@ -118,9 +118,9 @@ export const services: Service[] = [
   svc({
     id: 9, category_id: 6, slug: 'kids-dentistry', icon: 'kids', image: '/img/kids.webp', charges: 700, service_time: 30, is_featured: true,
     name: "Children's Dentistry", name_ar: 'أسنان الأطفال',
-    short_description: 'Gentle first visits, fissure sealants and fluoride — no fear, no rush.', short_description_ar: 'أول زيارات هادية، سد شقوق وفلورايد — من غير خوف ولا استعجال.',
-    description: 'The first visits are about trust. We explain everything to your child in their language, and keep treatment short and calm.',
-    description_ar: 'أول الزيارات هدفها الثقة. بنشرح لطفلك كل حاجة بلغته، والعلاج بيكون قصير وهادي.',
+    short_description: 'Gentle first visits, fissure sealants and fluoride — no fear, no rush.', short_description_ar: 'أول زيارات لطيفة، سد شقوق وفلورايد — من غير خوف ولا استعجال.',
+    description: 'The first visits are about trust. We explain everything to your child in their language, and keep treatment short and gentle.',
+    description_ar: 'أول الزيارات هدفها الثقة. بنشرح لطفلك كل حاجة بلغته، والعلاج بيكون قصير ومريح.',
     preparation: 'Talk about the visit positively at home. Morning or after-school slots work best.', preparation_ar: 'اتكلم عن الزيارة بشكل إيجابي في البيت. مواعيد بعد المدرسة بتبقى أحسن.',
     aftercare: 'After fluoride, no eating or drinking for 30 minutes.', aftercare_ar: 'بعد الفلورايد، ممنوع الأكل والشرب ٣٠ دقيقة.',
     related_service_ids: [1],
@@ -130,7 +130,7 @@ export const services: Service[] = [
     name: 'Wisdom Tooth Surgery', name_ar: 'خلع ضرس العقل',
     short_description: 'Careful surgical removal when a wisdom tooth is causing real problems.', short_description_ar: 'خلع جراحي بعناية لما ضرس العقل يكون عامل مشكلة حقيقية.',
     description: 'Not every wisdom tooth needs to go. When it does, we plan with X-rays, keep the procedure gentle and give you clear written aftercare.',
-    description_ar: 'مش كل ضرس عقل لازم يتخلع. ولو لازم، بنخطط بالأشعة، والعملية بتكون هادية، ومعاك تعليمات مكتوبة بعدها.',
+    description_ar: 'مش كل ضرس عقل لازم يتخلع. ولو لازم، بنخطط بالأشعة، والعملية بتكون مريحة، ومعاك تعليمات مكتوبة بعدها.',
     preparation: 'Eat a light meal before. Arrange for someone to take you home if you are anxious.', preparation_ar: 'كُل وجبة خفيفة قبلها. خلي حد يروحك لو قلقان.',
     aftercare: 'Bite on gauze for 30 minutes, cold compresses, soft food, and no rinsing for 24 hours.', aftercare_ar: 'اعض على الشاش ٣٠ دقيقة، كمادات ساقعة، أكل طري، ومن غير مضمضة ٢٤ ساعة.',
     related_service_ids: [5],
@@ -188,7 +188,7 @@ export const faqs: Faq[] = [
   { id: 1, question: 'Will you tell me the cost before treatment?', question_ar: 'هتقولولي التكلفة قبل العلاج؟', answer: 'Yes. Every plan is written with its estimated cost before we begin, and it never changes without your agreement.', answer_ar: 'أيوه. كل خطة مكتوب فيها التكلفة التقديرية قبل ما نبدأ، ومبتتغيرش غير بموافقتك.' },
   { id: 2, question: 'Do you always recommend implants?', question_ar: 'هل دايمًا بتنصحوا بالزراعة؟', answer: 'No. We try to save your tooth first. An implant is only planned when keeping the tooth is genuinely not possible.', answer_ar: 'لأ. بنحاول نحافظ على سنتك الأول. الزراعة بنخطط لها بس لما الحفاظ على السنة يبقى مش ممكن فعلًا.' },
   { id: 3, question: 'I am anxious about dentists. Can you help?', question_ar: 'أنا بخاف من دكتور الأسنان. تقدروا تساعدوني؟', answer: 'Tell us when you book. We plan longer appointments, explain each step and stop whenever you raise your hand.', answer_ar: 'قولنا وانت بتحجز. بنخلي الميعاد أطول، ونشرح كل خطوة، ونوقف أول ما ترفع إيدك.' },
-  { id: 4, question: 'Do you treat children?', question_ar: 'بتعالجوا أطفال؟', answer: 'Yes — gentle first visits, fissure sealants, fluoride and orthodontic assessment.', answer_ar: 'أيوه — زيارات أولى هادية، سد شقوق، فلورايد، وتقييم تقويم.' },
+  { id: 4, question: 'Do you treat children?', question_ar: 'بتعالجوا أطفال؟', answer: 'Yes — gentle first visits, fissure sealants, fluoride and orthodontic assessment.', answer_ar: 'أيوه — زيارات أولى لطيفة، سد شقوق، فلورايد، وتقييم تقويم.' },
   { id: 5, question: 'What are your working hours?', question_ar: 'مواعيد العيادة إيه؟', answer: 'Saturday to Thursday, 12 PM to 10 PM. Friday we rest.', answer_ar: 'من السبت للخميس، من ١٢ الظهر لـ ١٠ بالليل. الجمعة إجازة.' },
 ]
 
@@ -316,8 +316,8 @@ export function seed(version: number): DB {
 
   const reviews: Review[] = [
     { name: 'Mona F.', review: 'أول مرة دكتور يشرحلي الخطة كلها ويكتبهالي قبل ما يبدأ. حسيت إني فاهمة وفي أمان.', service_id: 3, doctor_id: 1 },
-    { name: 'Omar K.', review: 'They saved a tooth two other clinics told me to pull. Calm, honest, zero pressure.', service_id: 3, doctor_id: 1 },
-    { name: 'Salma H.', review: 'المكان هادي جدًا والتعامل محترم، وابني دخل الكشف وهو بيضحك.', service_id: 9, doctor_id: 2 },
+    { name: 'Omar K.', review: 'They saved a tooth two other clinics told me to pull. Honest, gentle, zero pressure.', service_id: 3, doctor_id: 1 },
+    { name: 'Salma H.', review: 'المكان مريح جدًا والتعامل محترم، وابني دخل الكشف وهو بيضحك.', service_id: 9, doctor_id: 2 },
     { name: 'Tarek N.', review: 'The written plan with costs up front made the implant decision easy.', service_id: 5, doctor_id: 1 },
     { name: 'Yasmine A.', review: 'عملت تجربة مؤقتة للفينير وشفت النتيجة قبل أي حاجة. النتيجة طبيعية جدًا.', service_id: 7, doctor_id: 2 },
     { name: 'Hany G.', review: 'On time, spotless, and they actually listen. Best dental visit I have had.', service_id: 1, doctor_id: 1 },

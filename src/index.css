@@ -89,3 +89,9 @@ html[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
 html[dir="rtl"] .thin { font-weight: 300; }
 
 @keyframes pathsDrift { from { transform: translate3d(-3%, -2%, 0) rotate(-1deg); } to { transform: translate3d(3%, 2%, 0) rotate(1deg); } }
+
+/* Arabic: every title, heading and subheading in bold (outside layers, so it wins over thin/light weights). */
+html[dir="rtl"] :is(h1, h2, h3, h4, h5, h6, .font-display, .font-ar-display, .eyebrow),
+html[dir="rtl"] :is(h1, h2, h3, h4, h5, h6) * {
+  font-weight: 700;
+}

@@ -76,7 +76,7 @@ export function HeroLight() {
                 ))}
               </div>
               <p data-fade className="mt-5 text-[0.82rem] leading-relaxed text-charcoal/60">
-                {L('Calm, honest dentistry in Nasr City. We explain before we treat, keep what can be kept, and write your plan before we begin.', 'طب أسنان هادي وصريح في مدينة نصر. بنشرح قبل ما نعالج، بنحافظ على اللي ينفع يتحافظ عليه، وبنكتب خطتك قبل ما نبدأ.')}
+                {L('Honest, gentle dentistry in Nasr City. We explain before we treat, keep what can be kept, and write your plan before we begin.', 'طب أسنان صريح ومريح في مدينة نصر. بنشرح قبل ما نعالج، بنحافظ على اللي ينفع يتحافظ عليه، وبنكتب خطتك قبل ما نبدأ.')}
               </p>
             </div>
           </div>

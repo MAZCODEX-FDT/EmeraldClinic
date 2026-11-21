@@ -10,7 +10,7 @@ import { PillCta } from './HeroLight'
 // Photos by kind of treatment (MazMed's own service ids differ per clinic).
 const PHOTO: Record<string, { img: string; tags: { en: string; ar: string }[] }> = {
   aligner: { img: '/img/aligner-life.webp', tags: [{ en: 'Invisible', ar: 'مش باين' }, { en: 'Removable', ar: 'بيتشال' }, { en: 'Comfort fit', ar: 'مريح' }] },
-  kids: { img: '/img/kids.webp', tags: [{ en: 'Gentle', ar: 'هادي' }, { en: 'No fear', ar: 'من غير خوف' }] },
+  kids: { img: '/img/kids.webp', tags: [{ en: 'Gentle', ar: 'لطيف' }, { en: 'No fear', ar: 'من غير خوف' }] },
   veneer: { img: '/img/smile.webp', tags: [{ en: 'Mock-up first', ar: 'Mock-up الأول' }, { en: 'Natural', ar: 'طبيعي' }] },
   implant: { img: '/img/implant-jaw.webp', tags: [{ en: '3D planned', ar: 'متخطط 3D' }, { en: 'Guided', ar: 'بدليل جراحي' }] },
 }

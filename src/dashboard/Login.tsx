@@ -21,7 +21,7 @@ export default function Login() {
         <Logo light size={40} />
         <div className="relative">
           <Mark size={120} tooth="#BFE3D3" smile="#F7F4EE" />
-          <p className="font-display mt-10 max-w-md text-4xl leading-tight font-semibold">{tr('Every plan, every chair, every smile — in one calm place.', 'كل خطة، كل كرسي، كل ابتسامة — في مكان واحد هادي.')}</p>
+          <p className="font-display mt-10 max-w-md text-4xl leading-tight font-semibold">{tr('Every plan, every chair, every smile — in one place.', 'كل خطة، كل كرسي، كل ابتسامة — في مكان واحد.')}</p>
         </div>
         <p className="relative text-xs text-ivory/50">Emerald Clinic OS · MAZCODEX</p>
       </div>

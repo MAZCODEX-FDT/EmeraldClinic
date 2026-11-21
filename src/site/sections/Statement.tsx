@@ -25,7 +25,7 @@ export function Statement() {
       <div className="mx-auto max-w-[88rem]">
         <div className="flex items-start justify-between text-xs text-charcoal/60">
           <p className="max-w-[14rem]">{L('Dentistry built on diagnosis first, treatment second.', 'طب أسنان بيبدأ بالتشخيص، وبعدين العلاج.')}</p>
-          <p className="hidden max-w-[14rem] text-end md:block">{L('A calm approach that keeps more of your natural teeth.', 'طريقة هادية بتحافظ على أكبر قدر من سنانك الطبيعية.')}</p>
+          <p className="hidden max-w-[14rem] text-end md:block">{L('An approach that keeps more of your natural teeth.', 'طريقة بتحافظ على أكبر قدر من سنانك الطبيعية.')}</p>
         </div>
 
         <div className="relative mt-16 min-h-[30rem] md:min-h-[36rem]">
@@ -43,7 +43,7 @@ export function Statement() {
           <div className="absolute start-0 top-[42%] z-10 hidden space-y-6 md:block">
             {[
               { v: 100, s: '%', l: L('Plans written first', 'خطط مكتوبة الأول'), img: '/img/plan.webp' },
-              { v: 3, s: '', l: L('Calm treatment chairs', 'كراسي علاج هادية'), img: '/img/crown.webp' },
+              { v: 3, s: '', l: L('Treatment chairs', 'كراسي علاج'), img: '/img/crown.webp' },
             ].map((m) => (
               <div data-mini key={m.l}>
                 <p className="font-display text-3xl font-semibold text-deep" dir="ltr"><CountUp to={m.v} duration={2} />{m.s}</p>
