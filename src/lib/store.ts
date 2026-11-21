@@ -19,7 +19,7 @@ export type DB = {
 }
 
 const KEY = 'emerald.db'
-const VERSION = 10
+const VERSION = 11
 
 function load(): DB {
   // Served by MazMed: the clinic's real doctors, services and branches, nothing kept in the browser.

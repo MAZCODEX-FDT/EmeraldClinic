@@ -173,9 +173,10 @@ export const doctors: Doctor[] = [
 
 export const branches: Branch[] = [{
   id: 1, name: 'Emerald Dental Clinic — Nasr City', name_ar: 'إميرالد لطب الأسنان — مدينة نصر',
-  address: 'Nasr City, Cairo', address_ar: 'مدينة نصر، القاهرة',
-  phone: '+20 10 0000 0000', whatsapp: '+201000000000', email: 'hello@emeralddental.eg',
-  map_url: 'https://maps.google.com/?q=Nasr+City+Cairo',
+  address: 'Medical Center 3, 3 Abou Dawoud Al Zaheri, 6th District, Nasr City, Cairo 4450415',
+  address_ar: 'المركز الطبي ٣، ٣ شارع أبو داود الظاهري، المنطقة السادسة، مدينة نصر، القاهرة',
+  phone: '010 5550 0355', whatsapp: '+201055500355', email: 'info@emerald-dentalclinic.com',
+  map_url: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Medical Center 3, 3 Abou Dawoud Al Zaheri, Nasr City, Cairo'),
   hours: 'Sat – Thu · 12 PM – 10 PM', hours_ar: 'السبت – الخميس · ١٢ ظهرًا – ١٠ مساءً', is_main: true, is_active: true,
 }]
 

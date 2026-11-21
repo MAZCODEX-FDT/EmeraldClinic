@@ -69,7 +69,7 @@ Demo login: `admin@emeralddental.eg` / `emerald2026`. Every module follows MazMe
 Until MazMed is connected, the dashboard demo data lives in `localStorage` (`src/lib/store.ts`), seeded from `src/lib/seed.ts`. The dashboard modules use the same field names as MazMed's admin. Moving them to MazMed's API v1 needs a small server-side proxy, because that API uses a Bearer key that must not ship to browsers. Replace the demo auth in `src/dashboard/auth.ts` at the same time.
 
 ### Placeholders to replace
-Phone, WhatsApp, email, domain, map link, doctor names, bios and photos, and real patient reviews.
+Doctor names, bios and photos, and real patient reviews.
 
 ## Scripts
 ```bash
