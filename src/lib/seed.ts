@@ -44,7 +44,7 @@ export const services: Service[] = [
     related_service_ids: [2, 6],
   }),
   svc({
-    id: 2, category_id: 2, slug: 'tooth-coloured-fillings', icon: 'filling', charges: 1200, service_time: 45,
+    id: 2, category_id: 2, slug: 'tooth-coloured-fillings', icon: 'filling', image: '/img/filling.webp', charges: 1200, service_time: 45,
     name: 'Tooth-coloured Fillings', name_ar: 'حشو تجميلي',
     short_description: 'Composite fillings matched to your shade, placed with minimal drilling.', short_description_ar: 'حشو كومبوزيت بلون سنتك، بأقل حفر ممكن.',
     description: 'We remove only the decayed part, keep as much natural tooth as possible and rebuild it in layers of composite matched to your exact shade.',
@@ -86,7 +86,7 @@ export const services: Service[] = [
     related_service_ids: [4, 10],
   }),
   svc({
-    id: 6, category_id: 3, slug: 'teeth-whitening', icon: 'whitening', image: '/img/smile.webp', charges: 3000, service_time: 60,
+    id: 6, category_id: 3, slug: 'teeth-whitening', icon: 'whitening', image: '/img/whitening.webp', charges: 3000, service_time: 60,
     name: 'Teeth Whitening', name_ar: 'تبييض الأسنان',
     short_description: 'In-clinic whitening with sensitivity care — natural shades, not chalk white.', short_description_ar: 'تبييض في العيادة مع حماية من الحساسية — درجات طبيعية مش أبيض مبالغ فيه.',
     description: 'We check that your teeth and gums are healthy first, agree on a realistic target shade together, then whiten in a single comfortable session.',
@@ -126,7 +126,7 @@ export const services: Service[] = [
     related_service_ids: [1],
   }),
   svc({
-    id: 10, category_id: 4, slug: 'wisdom-tooth', icon: 'extraction', charges: 2500, service_time: 60,
+    id: 10, category_id: 4, slug: 'wisdom-tooth', icon: 'extraction', image: '/img/wisdom-tooth.webp', charges: 2500, service_time: 60,
     name: 'Wisdom Tooth Surgery', name_ar: 'خلع ضرس العقل',
     short_description: 'Careful surgical removal when a wisdom tooth is causing real problems.', short_description_ar: 'خلع جراحي بعناية لما ضرس العقل يكون عامل مشكلة حقيقية.',
     description: 'Not every wisdom tooth needs to go. When it does, we plan with X-rays, keep the procedure gentle and give you clear written aftercare.',

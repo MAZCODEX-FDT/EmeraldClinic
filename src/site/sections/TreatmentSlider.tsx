@@ -44,16 +44,20 @@ export function TreatmentSlider() {
 
       <div ref={track} className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-4 [scrollbar-width:none] md:px-10 [&::-webkit-scrollbar]:hidden">
         {list.map((s) => {
+          // Every treatment shows a photo: the slider's own pick, else the treatment's photo from MazMed / the catalogue.
           const ph = PHOTO[s.icon]
+          const img = ph?.img ?? s.image
+          const cut = !!img && img.includes('-cut')
+          const tags = ph ? ph.tags.map((t) => pick(t)) : [`${s.service_time} ${L('min', 'دقيقة')}`, L('Learn more', 'اعرف أكتر')]
           return (
             <Link data-tcard key={s.id} to={`/treatments/${s.slug}`} className="group relative flex h-[26rem] w-[19rem] shrink-0 snap-start flex-col overflow-hidden rounded-[1.75rem] bg-mist transition-colors hover:bg-jade/50 md:w-[21rem]">
-              {ph ? (
+              {img ? (
                 <>
-                  <img src={ph.img} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-premium group-hover:scale-105" />
+                  <img src={img} alt="" loading="lazy" className={`absolute inset-0 h-full w-full transition-transform duration-[1.2s] ease-premium group-hover:scale-105 ${cut ? 'object-contain px-6 pt-16 pb-20' : 'object-cover'}`} />
                   <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-deep/40" />
                   <p className="font-display relative p-6 text-lg font-medium text-charcoal">{l(s, 'name')}</p>
                   <div className="relative mt-auto flex flex-wrap gap-2 p-5">
-                    {ph.tags.map((t) => <span key={t.en} className="rounded-full bg-white/90 px-4 py-2 text-[0.65rem] tracking-[0.15em] text-charcoal uppercase backdrop-blur">{pick(t)}</span>)}
+                    {tags.map((t) => <span key={t} className="rounded-full bg-white/90 px-4 py-2 text-[0.65rem] tracking-[0.15em] text-charcoal uppercase backdrop-blur">{t}</span>)}
                   </div>
                 </>
               ) : (

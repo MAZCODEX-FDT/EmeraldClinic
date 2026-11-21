@@ -44,11 +44,21 @@ function iconFor(s: { name: string; slug: string }): string {
   return rules.find(([r]) => r.test(t))?.[1] ?? 'tooth'
 }
 
+/** A photo for each kind of treatment, used when the service has no photo in MazMed. */
+const PHOTO_FOR: Record<string, string> = {
+  checkup: '/img/scan.webp', filling: '/img/filling.webp', rootcanal: '/img/tooth-cut.webp', crown: '/img/crown.webp',
+  implant: '/img/implant-cut.webp', whitening: '/img/whitening.webp', veneer: '/img/smile.webp', aligner: '/img/aligner-life.webp',
+  kids: '/img/kids.webp', extraction: '/img/wisdom-tooth.webp', tooth: '/img/consult.webp',
+}
+
 /** The site's tables, filled from MazMed instead of the demo data. */
 export function liveTables(p: MazmedPage) {
   return {
     categories: p.categories.map((c, i): ServiceCategory => ({ ...c, sort_order: i, is_active: true, show_on_website: true })),
-    services: p.services.map((s): Service => ({ ...s, icon: iconFor(s), image: s.image ?? undefined, faqs: s.faqs ?? [] }) as Service),
+    services: p.services.map((s): Service => {
+      const icon = iconFor(s)
+      return { ...s, icon, image: s.image ?? PHOTO_FOR[icon], faqs: s.faqs ?? [] } as Service
+    }),
     specializations: p.specializations.map(({ id, name, name_ar }) => ({ id, name, name_ar: name_ar ?? name })),
     doctors: p.doctors.map((d): Doctor => ({ ...d, title: d.title, full_name_ar: d.full_name_ar ?? d.user.full_name }) as Doctor),
     branches: p.branches.map((b): Branch => ({
