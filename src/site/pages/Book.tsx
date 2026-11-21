@@ -251,7 +251,7 @@ export default function Book() {
 
           <aside className="hidden self-start lg:sticky lg:top-28 lg:block">
             <div className="glow-bg grain relative overflow-hidden rounded-[2rem] p-7 text-ivory">
-              <Mark size={240} tooth="rgba(191,227,211,.08)" smile="rgba(247,244,238,.06)" className="pointer-events-none absolute -end-14 -bottom-14" />
+              <Mark size={240} className="pointer-events-none absolute -end-14 -bottom-14" tone="dark" opacity={0.18} />
               <p className="eyebrow text-jade">{L('Your booking', 'حجزك')}</p>
               <dl className="relative mt-6 space-y-5">
                 <div><dt className="text-xs text-jade/80">{L('Services', 'الخدمات')}</dt><dd className="font-display mt-1">{chosenServices.length ? chosenServices.map((s) => l(s, 'name')).join('، ') : L('Consultation', 'كشف')}</dd></div>

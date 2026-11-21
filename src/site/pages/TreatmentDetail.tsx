@@ -64,7 +64,7 @@ export default function TreatmentDetail() {
           </div>
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div className="glow-bg grain relative overflow-hidden rounded-[2rem] p-8 text-ivory">
-              <Mark size={260} tooth="rgba(191,227,211,.08)" smile="rgba(247,244,238,.06)" className="pointer-events-none absolute -end-16 -bottom-16" />
+              <Mark size={260} className="pointer-events-none absolute -end-16 -bottom-16" tone="dark" opacity={0.18} />
               <span className="grid size-16 place-items-center rounded-2xl bg-jade text-deep"><DentalIcon name={s.icon} size={34} /></span>
               <p className="mt-8 flex items-center gap-2 text-xs text-jade"><Clock className="size-3.5" />{L('Chair time', 'مدة الجلسة')}</p>
               <p className="font-display mt-1 text-3xl">{s.service_time} {L('min', 'دقيقة')}</p>

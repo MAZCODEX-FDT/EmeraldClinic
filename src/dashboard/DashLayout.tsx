@@ -42,7 +42,7 @@ export default function DashLayout() {
   const sidebar = (
     <nav className="flex h-full flex-col gap-1 p-3">
       <div className="mb-6 flex h-12 items-center gap-3 overflow-hidden px-2">
-        {expanded ? <Logo light size={32} /> : <Mark size={32} tooth="#BFE3D3" smile="#F7F4EE" />}
+        {expanded ? <Logo light size={32} /> : <Mark size={32} tone="dark" />}
       </div>
       {links.map((l) => (
         <NavLink key={l.to} to={l.to} end={l.end}

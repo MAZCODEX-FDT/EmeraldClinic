@@ -88,7 +88,7 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
           </Link>
           <button onClick={() => go(1)} aria-label="Next" className="grid size-10 place-items-center rounded-lg border border-charcoal/20 bg-white text-charcoal [clip-path:polygon(0_0,75%_0,100%_25%,100%_100%,0_100%)] hover:bg-deep hover:text-ivory"><ChevronRight className="size-4 rtl:-scale-x-100" /></button>
         </div>
-        <Mark size={260} tooth="rgba(31,122,92,.04)" smile="rgba(14,77,60,.03)" className="pointer-events-none absolute -end-16 -bottom-20" />
+        <Mark size={260} className="pointer-events-none absolute -end-16 -bottom-20" opacity={0.09} />
       </div>
     </section>
   )

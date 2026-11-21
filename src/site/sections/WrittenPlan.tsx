@@ -35,7 +35,7 @@ export function WrittenPlan() {
         }
       >
         <div className="relative grid min-h-[30rem] gap-8 overflow-hidden p-6 md:grid-cols-[1fr_1.4fr] md:p-10">
-          <Mark size={180} tooth="rgba(31,122,92,.06)" smile="rgba(14,77,60,.05)" className="pointer-events-none absolute -top-10 -start-10" />
+          <Mark size={180} className="pointer-events-none absolute -top-10 -start-10" opacity={0.13} />
           <div className="absolute end-0 top-0 size-24 bg-emerald [clip-path:polygon(100%_0,0_0,100%_100%)] rtl:[clip-path:polygon(0_0,100%_0,0_100%)]" />
           <div className="relative flex flex-col">
             <p className="eyebrow text-emerald">{t.plan.sample}</p>

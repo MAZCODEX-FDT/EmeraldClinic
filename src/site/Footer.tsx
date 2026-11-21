@@ -13,7 +13,7 @@ const Facebook = ({ className = '' }: { className?: string }) => (
 )
 
 export function Footer() {
-  const { t, l } = useLang()
+  const { t, l, lang } = useLang()
   const b = useDB(mainBranch)
   const s = useDB((d) => d.settings)
   return (
@@ -49,8 +49,8 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-24 flex items-end justify-between gap-6 overflow-hidden">
-          <p className="font-display select-none text-[18vw] leading-[0.8] font-bold tracking-[0.06em] text-ivory/[0.06] md:text-[13vw]" aria-hidden>{t.brand.name.toUpperCase()}</p>
-          <Mark size={96} tooth="#BFE3D3" smile="#F7F4EE" className="mb-4 hidden shrink-0 opacity-30 md:block" />
+          <p className="select-none text-[18vw] leading-[0.8] tracking-[0.08em] text-ivory/[0.07] md:text-[13vw]" style={{ fontFamily: lang === "ar" ? "Tajawal, sans-serif" : "Italiana, serif", fontWeight: lang === "ar" ? 700 : 400 }} aria-hidden>{t.brand.name.toUpperCase()}</p>
+          <Mark size={96} className="mb-4 hidden shrink-0 opacity-30 md:block" tone="dark" />
         </div>
         <div className="mt-6 flex flex-col justify-between gap-3 border-t border-ivory/10 pt-6 text-xs text-ivory/50 md:flex-row">
           <p>© {new Date().getFullYear()} Emerald Dental Clinic. {t.footer.rights}</p>

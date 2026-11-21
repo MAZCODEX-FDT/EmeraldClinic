@@ -11,7 +11,7 @@ export function PageHero({ eyebrow, title, sub, children, image }: { eyebrow: st
         {image ? (
           <div className="arch pointer-events-none absolute end-[5%] bottom-[7%] hidden h-[78%] w-[22rem] items-end justify-center overflow-hidden bg-white shadow-[0_30px_60px_-30px_rgba(14,77,60,.35)] lg:flex"><img src={image} alt="" className={image.includes('-cut') ? 'fade-b h-[88%] w-full object-contain object-bottom' : 'h-full w-full object-cover'} /></div>
         ) : (
-          <Mark size={420} tooth="rgba(31,122,92,.06)" smile="rgba(14,77,60,.05)" className="pointer-events-none absolute -end-20 -bottom-24" />
+          <Mark size={420} className="pointer-events-none absolute -end-20 -bottom-24" opacity={0.13} />
         )}
         <div className="relative mx-auto max-w-[88rem]">
           <p className="eyebrow text-emerald">{eyebrow}</p>

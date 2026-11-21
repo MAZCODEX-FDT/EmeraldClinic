@@ -1,37 +1,45 @@
 import { useLang } from '@/lib/i18n'
 
-/** Emerald monoline mark: tooth outline cradled by a smile arc (stroke = 10/128). */
-export function Mark({ size = 40, tooth = '#1F7A5C', smile = '#0E4D3C', className = '', draw = false }: { size?: number; tooth?: string; smile?: string; className?: string; draw?: boolean }) {
+/**
+ * Emerald's mark (brand guidelines v2): a tooth built from four overlapping translucent forms,
+ * two halves and two crown ellipses. "light" is the colourway for light backgrounds,
+ * "dark" the one for Emerald Deep. Exported from the brand guidelines in Canva.
+ */
+export function Mark({ size = 40, tone = 'light', className = '', opacity }: { size?: number; tone?: 'light' | 'dark'; className?: string; opacity?: number }) {
   return (
-    <svg viewBox="0 0 128 128" width={size} height={size} className={className} fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path
-        data-draw={draw || undefined}
-        stroke={tooth}
-        strokeWidth={10}
-        d="M40 14C28 14 22 24 22 36c0 14 8 22 11 36 2 12 4 26 11 26s8-18 12-26c2-4 6-6 8-6s6 2 8 6c4 8 5 26 12 26s9-14 11-26c3-14 11-22 11-36 0-12-6-22-18-22-10 0-16 6-24 6s-14-6-24-6Z"
-      />
-      <path data-draw={draw || undefined} stroke={smile} strokeWidth={10} d="M16 92A60 60 0 0 0 112 92" />
-    </svg>
+    <img
+      src={tone === 'dark' ? '/img/mark-dark.webp' : '/img/mark-light.webp'}
+      width={size}
+      height={size}
+      alt=""
+      aria-hidden
+      draggable={false}
+      className={`select-none ${className}`}
+      style={opacity === undefined ? undefined : { opacity }}
+    />
   )
 }
 
+/**
+ * The primary logo: mark + wordmark. English: EMERALD in Italiana (+8% tracking) with
+ * DENTAL CLINIC in Jost Light (+62%) centred under it. Arabic lockup in Tajawal.
+ */
 export function Logo({ light = false, size = 38 }: { light?: boolean; size?: number }) {
   const { lang } = useLang()
-  const toothC = light ? '#BFE3D3' : '#1F7A5C'
-  const smileC = light ? '#F7F4EE' : '#0E4D3C'
-  const text = light ? 'text-ivory' : 'text-deep'
+  const name = light ? 'text-ivory' : 'text-deep'
+  const sub = light ? 'text-jade' : 'text-emerald'
   return (
-    <span className="inline-flex items-center gap-3">
-      <Mark size={size} tooth={toothC} smile={smileC} />
+    <span className="inline-flex items-center gap-2.5" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      <Mark size={size} tone={light ? 'dark' : 'light'} />
       {lang === 'ar' ? (
-        <span className={`flex flex-col leading-none ${text}`}>
-          <span className="font-ar-display text-[1.35rem] font-bold">إميرالد</span>
-          <span className="font-ar text-[0.78rem] opacity-70 mt-0.5">لطب الأسنان</span>
+        <span className="flex flex-col items-center leading-none">
+          <span className={`text-[1.45rem] font-bold ${name}`} style={{ fontFamily: 'Tajawal, sans-serif' }}>إميرالد</span>
+          <span className={`mt-0.5 text-[0.72rem] font-medium ${sub}`} style={{ fontFamily: 'Tajawal, sans-serif' }}>لطب الأسنان</span>
         </span>
       ) : (
-        <span className={`flex flex-col leading-none ${text}`}>
-          <span className="font-display text-[1.15rem] font-bold tracking-[0.14em]">EMERALD</span>
-          <span className="text-[0.55rem] tracking-[0.62em] opacity-70 mt-1">DENTAL CLINIC</span>
+        <span className="flex flex-col items-center leading-none">
+          <span className={`text-[1.55rem] tracking-[0.08em] ${name}`} style={{ fontFamily: 'Italiana, serif', fontWeight: 400 }}>EMERALD</span>
+          <span className={`mt-0.5 ps-[0.62em] text-[0.5rem] tracking-[0.62em] ${sub}`} style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>DENTAL CLINIC</span>
         </span>
       )}
     </span>

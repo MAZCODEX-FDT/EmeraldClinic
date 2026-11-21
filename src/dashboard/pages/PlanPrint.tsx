@@ -41,8 +41,8 @@ export default function PlanPrint() {
         <button onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-full bg-deep px-5 py-2.5 text-sm font-medium text-ivory"><Printer className="size-4" />{tr('Print / Save PDF', 'اطبع / احفظ PDF')}</button>
       </div>
       <article className="relative mx-auto flex min-h-[297mm] w-full max-w-[210mm] flex-col overflow-hidden bg-white p-[16mm] shadow-xl print:shadow-none">
-        <Mark size={260} tooth="rgba(31,122,92,.05)" smile="rgba(14,77,60,.04)" className="absolute -top-16 -start-16" />
-        <Mark size={260} tooth="rgba(31,122,92,.05)" smile="rgba(14,77,60,.04)" className="absolute -end-16 -bottom-16" />
+        <Mark size={260} className="absolute -top-16 -start-16" opacity={0.11} />
+        <Mark size={260} className="absolute -end-16 -bottom-16" opacity={0.11} />
         <div className="absolute end-0 top-0 size-28 bg-emerald [clip-path:polygon(100%_0,0_0,100%_100%)] rtl:[clip-path:polygon(0_0,100%_0,0_100%)]" />
         <div className="absolute start-0 bottom-0 size-16 bg-deep [clip-path:polygon(0_100%,0_0,100%_100%)] rtl:[clip-path:polygon(100%_100%,100%_0,0_100%)]" />
 
