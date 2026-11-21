@@ -44,14 +44,14 @@ export default function Contact() {
     <div ref={root}>
       <PageHero image="/img/dr-nour-cut.webp" eyebrow={L('Contact', 'تواصل')} title={L('We’re here to help.', 'إحنا هنا علشانك.')}
         sub={L('Ask anything — about a treatment, a cost or a worry. The desk answers within working hours.', 'اسأل عن أي حاجة — علاج، تكلفة، أو حاجة مقلقاك. الريسبشن بيرد في مواعيد العمل.')} />
-      <section className="bg-[#FBFBFA] px-5 pb-24 md:px-10">
+      <section className="px-5 pb-24 md:px-10">
         <div className="mx-auto max-w-[88rem]">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {cards.map((c) => (
-              <a data-c key={c.t} href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="group rounded-[1.75rem] bg-white p-7 transition-shadow hover:shadow-[0_30px_60px_-30px_rgba(14,77,60,.35)]">
-                <span className="grid size-12 place-items-center rounded-2xl bg-mist text-deep transition-colors group-hover:bg-deep group-hover:text-jade"><c.icon className="size-5" /></span>
-                <p className="mt-6 text-sm text-stone">{c.t}</p>
-                <p className="font-display mt-1 text-lg font-medium text-charcoal" dir={c.ltr ? 'ltr' : undefined}>{c.v}</p>
+              <a data-c key={c.t} href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className="group glow-bg rounded-[1.75rem] p-7 transition-shadow hover:shadow-[0_30px_60px_-30px_rgba(14,77,60,.6)]">
+                <span className="grid size-12 place-items-center rounded-2xl bg-ivory/10 text-jade transition-colors group-hover:bg-jade group-hover:text-deep"><c.icon className="size-5" /></span>
+                <p className="mt-6 text-sm font-medium text-jade">{c.t}</p>
+                <p className="font-display mt-1 text-lg font-semibold text-ivory" dir={c.ltr ? 'ltr' : undefined}>{c.v}</p>
               </a>
             ))}
           </div>

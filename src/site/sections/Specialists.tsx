@@ -47,7 +47,7 @@ export function Specialists({ compact = false }: { compact?: boolean }) {
 
   return (
     <section ref={root} className={`bg-white px-5 md:px-10 ${compact ? 'py-10' : 'py-24 md:py-32'}`}>
-      <div className="relative mx-auto max-w-[80rem] overflow-hidden rounded-[2.5rem] bg-[#FBFBFA] px-6 pt-10 pb-10 md:px-14 md:pt-14">
+      <div className="relative mx-auto max-w-[80rem] overflow-hidden rounded-[2.5rem] bg-mist px-6 pt-10 pb-10 md:px-14 md:pt-14">
         <div className="flex items-start justify-between">
           <div>
             <p className="eyebrow flex items-center gap-2 text-charcoal"><Plus className="size-3.5" />{L('Our specialists', 'أطباؤنا')}</p>
@@ -99,7 +99,7 @@ export function DoctorPhotoCard({ d, serviceId }: { d: Doctor; serviceId?: numbe
   const { lang } = useLang()
   const L = useL()
   return (
-    <Link to={`/book?doctor=${d.id}${serviceId ? `&service=${serviceId}` : ''}`} className="group block overflow-hidden rounded-[2rem] bg-[#FBFBFA] transition-shadow hover:shadow-[0_30px_60px_-30px_rgba(14,77,60,.35)]">
+    <Link to={`/book?doctor=${d.id}${serviceId ? `&service=${serviceId}` : ''}`} className="group block overflow-hidden rounded-[2rem] bg-white transition-shadow hover:shadow-[0_30px_60px_-30px_rgba(14,77,60,.35)]">
       <div className="relative aspect-[3/4] overflow-hidden">
         <div className="absolute inset-[15%] rounded-full bg-jade/0 blur-3xl transition-colors duration-700 group-hover:bg-jade/70" />
         <div className="relative h-full grayscale transition-all duration-700 group-hover:scale-[1.03] group-hover:grayscale-0"><Photo d={d} /></div>

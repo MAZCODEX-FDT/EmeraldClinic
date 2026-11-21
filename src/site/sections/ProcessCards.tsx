@@ -24,7 +24,7 @@ export function ProcessCards() {
   ]
 
   return (
-    <section ref={root} className="bg-white px-5 py-24 md:px-10 md:py-32">
+    <section ref={root} className="bg-cloud px-5 py-24 md:px-10 md:py-32">
       <div className="mx-auto max-w-[88rem]">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <h2 className={lang === 'ar' ? 'font-ar-display text-5xl leading-tight text-charcoal md:text-6xl' : 'font-display text-5xl leading-[0.95] tracking-[-0.02em] text-charcoal md:text-6xl'}>

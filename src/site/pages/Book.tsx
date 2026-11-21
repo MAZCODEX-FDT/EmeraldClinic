@@ -96,8 +96,8 @@ export default function Book() {
   const input = 'mt-2 w-full rounded-2xl border border-deep/15 bg-white px-5 py-3.5 outline-none transition-colors focus:border-emerald'
 
   return (
-    <section className="min-h-screen bg-[#FBFBFA] px-2 pt-2 pb-24 md:px-4 md:pt-4">
-      <div className="rounded-[2rem] bg-[linear-gradient(180deg,#F1F5F2_0%,#FBFBFA_60%)] px-4 pt-32 pb-10 md:rounded-[2.75rem] md:px-10 md:pt-40">
+    <section className="min-h-screen px-2 pt-2 pb-24 md:px-4 md:pt-4">
+      <div className="rounded-[2rem] bg-[linear-gradient(180deg,#DDEDE3_0%,#EEF5F1_60%)] px-4 pt-32 pb-10 md:rounded-[2.75rem] md:px-10 md:pt-40">
         <div ref={root} className="mx-auto grid max-w-[80rem] gap-8 lg:grid-cols-[1fr_22rem]">
           <div>
             <p className="eyebrow text-emerald">{L('Online booking', 'الحجز أونلاين')}</p>

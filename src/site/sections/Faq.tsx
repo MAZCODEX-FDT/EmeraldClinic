@@ -26,7 +26,7 @@ export function Faq() {
   const faqs = useDB((d) => d.faqs)
   const [open, setOpen] = useState(0)
   return (
-    <section className="bg-white px-6 py-28 md:py-36">
+    <section className="bg-mist px-6 py-28 md:py-36">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_1.4fr]">
         <div className="self-start lg:sticky lg:top-32"><SectionHead eyebrow={t.faq.eyebrow} title={t.faq.title} /></div>
         <div>{faqs.map((f, i) => <Item key={f.id} q={l(f, 'question')} a={l(f, 'answer')} open={open === i} onToggle={() => setOpen(open === i ? -1 : i)} />)}</div>

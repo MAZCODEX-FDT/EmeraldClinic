@@ -32,7 +32,7 @@ export default function TreatmentDetail() {
       <PageHero image={s.image} eyebrow={cat ? l(cat, 'name') : L('Treatment', 'علاج')} title={l(s, 'name')} sub={l(s, 'short_description')}>
         <Link to="/treatments" className="mt-8 inline-flex items-center gap-2 text-sm text-emerald hover:text-deep"><ArrowLeft className="size-4 rtl:-scale-x-100" />{L('All treatments', 'كل العلاجات')}</Link>
       </PageHero>
-      <section className="bg-[#FBFBFA] px-5 pb-24 md:px-10">
+      <section className="px-5 pb-24 md:px-10">
         <div className="mx-auto grid max-w-[88rem] gap-10 lg:grid-cols-[1.3fr_1fr]">
           <div>
             <p data-reveal className="font-display text-2xl leading-relaxed text-charcoal md:text-3xl md:leading-relaxed">{l(s, 'description')}</p>

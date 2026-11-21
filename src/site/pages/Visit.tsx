@@ -52,7 +52,7 @@ export default function Visit() {
       </PageHero>
 
       {/* promises */}
-      <section className="bg-[#FBFBFA] px-5 pb-20 md:px-10">
+      <section className="px-5 pb-20 md:px-10">
         <div data-promises className="mx-auto grid max-w-[88rem] gap-4 md:grid-cols-3">
           {[
             { icon: Ear, t: L('We listen first', 'بنسمعك الأول'), b: L('The first minutes are yours: what hurts, what worries you, what you hope for.', 'أول دقايق بتاعتك: إيه اللي بيوجعك، إيه اللي مقلقك، وإيه اللي نفسك فيه.') },
@@ -142,7 +142,7 @@ export default function Visit() {
       </section>
 
       {/* where & when + FAQ */}
-      <section className="bg-[#FBFBFA] px-5 py-24 md:px-10">
+      <section className="px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-[88rem] gap-10 lg:grid-cols-2">
           <div>
             <h2 className="font-display text-3xl font-semibold text-charcoal">{L('Finding us', 'مكاننا')}</h2>

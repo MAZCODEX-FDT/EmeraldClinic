@@ -49,7 +49,7 @@ export function HeroLight() {
 
   return (
     <section ref={root} className="px-2 pt-2 md:px-4 md:pt-4">
-      <div className="relative isolate overflow-hidden rounded-[2rem] bg-[linear-gradient(180deg,#F1F5F2_0%,#E6EEE9_100%)] md:rounded-[2.75rem] lg:min-h-[calc(100svh-2rem)]">
+      <div className="relative isolate overflow-hidden rounded-[2rem] bg-[linear-gradient(180deg,#DDEDE3_0%,#C6E0D1_100%)] md:rounded-[2.75rem] lg:min-h-[calc(100svh-2rem)]">
         {wide && !prefersReducedMotion() && (
           <div className="absolute inset-0 -z-10 opacity-60 mix-blend-multiply">
             <Silk lightMode color="#CFE4D9" sheenColor="#FFFFFF" speed={1.6} scale={1.25} noiseIntensity={0.6} rotation={0.4} />

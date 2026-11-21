@@ -33,7 +33,7 @@ export function TreatmentSlider() {
   }
 
   return (
-    <section ref={root} className="bg-[#FBFBFA] py-24 md:py-32">
+    <section ref={root} className="bg-mist py-24 md:py-32">
       <div className="mx-auto flex max-w-[88rem] flex-col gap-6 px-5 md:flex-row md:items-end md:justify-between md:px-10">
         <h2 className={lang === 'ar' ? 'font-ar-display text-5xl leading-tight text-charcoal md:text-6xl' : 'font-display text-5xl leading-[0.95] tracking-[-0.02em] text-charcoal md:text-6xl'}>
           <span className="thin block">{L('Our', 'علاجات')}</span><span className="block font-semibold">{L('Treatments', 'إميرالد')}</span>
@@ -55,7 +55,7 @@ export function TreatmentSlider() {
                 <>
                   <img src={img} alt="" loading="lazy" className={`absolute inset-0 h-full w-full transition-transform duration-[1.2s] ease-premium group-hover:scale-105 ${cut ? 'object-contain px-6 pt-16 pb-20' : 'object-cover'}`} />
                   <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-deep/40" />
-                  <p className="font-display relative p-6 text-lg font-medium text-charcoal">{l(s, 'name')}</p>
+                  <p className="font-display relative p-6 text-lg font-bold text-deep">{l(s, 'name')}</p>
                   <div className="relative mt-auto flex flex-wrap gap-2 p-5">
                     {tags.map((t) => <span key={t} className="rounded-full bg-white/90 px-4 py-2 text-[0.65rem] tracking-[0.15em] text-charcoal uppercase backdrop-blur">{t}</span>)}
                   </div>
@@ -63,7 +63,7 @@ export function TreatmentSlider() {
               ) : (
                 <>
                   <div className="flex items-start justify-between p-6">
-                    <p className="font-display text-lg font-medium text-charcoal">{l(s, 'name')}</p>
+                    <p className="font-display text-lg font-bold text-deep">{l(s, 'name')}</p>
                     <DentalIcon name={s.icon} size={30} className="text-emerald/60 transition-colors group-hover:text-deep" />
                   </div>
                   <div className="mt-auto border-t border-deep/10 p-6">

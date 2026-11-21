@@ -31,7 +31,7 @@ export default function Treatments() {
           ))}
         </div>
       </PageHero>
-      <section className="bg-[#FBFBFA] px-5 pb-28 md:px-10">
+      <section className="px-5 pb-28 md:px-10">
         <div ref={grid} className="mx-auto grid max-w-[88rem] gap-5 md:grid-cols-2 lg:grid-cols-3">
           {list.map((s) => {
             const c = cats.find((x) => x.id === s.category_id)
@@ -44,7 +44,7 @@ export default function Treatments() {
                   {c && <span className="absolute start-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[0.7rem] text-deep backdrop-blur">{l(c, 'name')}</span>}
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <h2 className="font-display text-2xl font-semibold text-charcoal">{l(s, 'name')}</h2>
+                  <h2 className="font-display text-2xl font-bold text-deep">{l(s, 'name')}</h2>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal/65">{l(s, 'short_description')}</p>
                   <div className="mt-6 flex items-center justify-between border-t border-deep/10 pt-4 text-xs text-charcoal/60">
                     <span className="flex items-center gap-1.5"><Clock className="size-3.5" />{s.service_time} {L('min', 'دقيقة')}</span>
