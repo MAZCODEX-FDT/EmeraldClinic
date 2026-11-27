@@ -35,7 +35,8 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const lenis = useLenis(({ scroll }) => setScrolled(scroll > 40))
-  const darkHero = false
+  // Pages open on a dark jewel hero; the bar turns light once it floats over content.
+  const darkHero = !scrolled && !pathname.startsWith('/book')
 
   useEffect(() => { setOpen(false) }, [pathname])
   useEffect(() => { if (open) lenis?.stop(); else lenis?.start() }, [open, lenis])
@@ -67,9 +68,9 @@ export function Navbar() {
           </nav>
           <div className="flex items-center gap-2">
             <AccountLinks className="hidden md:flex" light={darkHero} />
-            <button onClick={toggle} className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${darkHero ? 'text-jade hover:text-ivory' : 'text-emerald hover:text-deep'}`}>{t.nav.lang}</button>
+            <button onClick={toggle} className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${darkHero ? 'text-gold hover:text-ivory' : 'text-emerald hover:text-deep'}`}>{t.nav.lang}</button>
             <div className="hidden sm:block"><Magnet padding={40} magnetStrength={3}>
-              <Link to="/book" className={`group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${darkHero ? 'bg-ivory text-deep hover:bg-jade' : 'bg-deep text-ivory hover:bg-emerald'}`}>
+              <Link to="/book" className={`group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors ${darkHero ? 'bg-gold text-deeper hover:bg-ivory' : 'bg-deep text-ivory hover:bg-emerald'}`}>
                 {t.nav.book}<ArrowUpRight className="size-4 transition-transform group-hover:rotate-45 rtl:-scale-x-100" />
               </Link>
             </Magnet></div>

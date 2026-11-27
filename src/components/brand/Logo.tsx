@@ -27,7 +27,7 @@ export function Mark({ size = 40, tone = 'light', className = '', opacity }: { s
 export function Logo({ light = false, size = 38 }: { light?: boolean; size?: number }) {
   const { lang } = useLang()
   const name = light ? 'text-ivory' : 'text-deep'
-  const sub = light ? 'text-jade' : 'text-emerald'
+  const sub = light ? 'text-gold' : 'text-emerald'
   return (
     <span className="inline-flex items-center gap-2.5" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <Mark size={size} tone={light ? 'dark' : 'light'} />

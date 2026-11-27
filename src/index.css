@@ -2,17 +2,20 @@
 @import "lenis/dist/lenis.css";
 
 @theme {
-  --color-deep: #0E4D3C;
-  --color-deeper: #093629;
-  --color-emerald: #1F7A5C;
-  --color-jade: #A8D8C1;
-  --color-beige: #E9DFCF;
-  --color-stone: #8C8F8D;
-  --color-charcoal: #2B2F2E;
-  --color-ivory: #F7F4EE;
-  --color-glow: #125A47;
-  --color-mist: #D6E9DD;
-  --color-cloud: #E3EFE7;
+  /* Jewel Emerald (v3, Nov 2026): saturated emerald, champagne gold accent, warm ivory ground. */
+  --color-deep: #04432F;
+  --color-deeper: #022A1E;
+  --color-emerald: #00875E;
+  --color-jade: #6FE3B4;
+  --color-beige: #E9DCC3;
+  --color-gold: #E6CF9E;
+  --color-gold-deep: #A8832F;
+  --color-stone: #6F7671;
+  --color-charcoal: #17201D;
+  --color-ivory: #FBF8F1;
+  --color-glow: #05704F;
+  --color-mist: #E3F2E9;
+  --color-cloud: #F4EFE4;
 
   --font-display: "Outfit", "Almarai", system-ui, sans-serif;
   --font-sans: "Inter", "Tajawal", system-ui, sans-serif;
@@ -23,7 +26,7 @@
 }
 
 @layer base {
-  html { background: #EEF5F1; color: var(--color-charcoal); -webkit-font-smoothing: antialiased; }
+  html { background: var(--color-ivory); color: var(--color-charcoal); -webkit-font-smoothing: antialiased; }
   body { font-family: var(--font-sans); }
   html[dir="rtl"] body { font-family: var(--font-ar); }
   html[dir="rtl"] .font-display { font-family: var(--font-ar-display); letter-spacing: 0 !important; }
@@ -37,8 +40,15 @@
 
 @utility glow-bg {
   background:
-    radial-gradient(120% 80% at 80% 0%, rgba(191, 227, 211, 0.18), transparent 60%),
-    linear-gradient(160deg, #125A47 0%, #0E4D3C 45%, #093629 100%);
+    radial-gradient(120% 80% at 80% 0%, rgba(17, 176, 125, 0.28), transparent 60%),
+    linear-gradient(160deg, #06654A 0%, #04432F 45%, #022A1E 100%);
+}
+
+/* Dark jewel panel for page heroes: an emerald glow over deep emerald. */
+@utility jewel-bg {
+  background:
+    radial-gradient(55% 65% at 50% 45%, rgba(17, 176, 125, 0.9) 0%, rgba(17, 176, 125, 0) 70%),
+    linear-gradient(160deg, #06654A 0%, #04432F 55%, #022A1E 100%);
 }
 
 @utility grain {
