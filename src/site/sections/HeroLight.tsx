@@ -105,7 +105,7 @@ export function HeroLight() {
             return a.to ? <Link key={i} to={a.to} className="contents">{inner}</Link> : <div key={i} className="contents">{inner}</div>
           })}
         </div>
-        <div className="px-3 pb-4 lg:hidden"><PillCta dark to="/book" className="w-full !py-2.5">{L('Book a visit', 'احجز زيارة')}</PillCta></div>
+        <div className="px-3 pb-4 lg:hidden"><PillCta to="/book" className="w-full !py-2.5">{L('Book a visit', 'احجز زيارة')}</PillCta></div>
       </div>
     </section>
   )
