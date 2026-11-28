@@ -22,7 +22,7 @@ export function Mark({ size = 40, tone = 'light', className = '', opacity }: { s
 
 /**
  * The primary logo: mark + wordmark. English: EMERALD in Italiana (+8% tracking) with
- * DENTAL CLINIC in Jost Light (+62%) centred under it. Arabic lockup in Tajawal.
+ * DENTAL CLINIC in Jost Medium (+50%) centred under it. Italiana gets a hairline stroke so it holds up at nav sizes. Arabic lockup in Tajawal.
  */
 export function Logo({ light = false, size = 38 }: { light?: boolean; size?: number }) {
   const { lang } = useLang()
@@ -38,8 +38,8 @@ export function Logo({ light = false, size = 38 }: { light?: boolean; size?: num
         </span>
       ) : (
         <span className="flex flex-col items-center leading-none">
-          <span className={`text-[1.55rem] tracking-[0.08em] ${name}`} style={{ fontFamily: 'Italiana, serif', fontWeight: 400 }}>EMERALD</span>
-          <span className={`mt-0.5 ps-[0.62em] text-[0.5rem] tracking-[0.62em] ${sub}`} style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}>DENTAL CLINIC</span>
+          <span className={`text-[1.7rem] tracking-[0.08em] ${name}`} style={{ fontFamily: 'Italiana, serif', fontWeight: 400, WebkitTextStroke: '0.6px currentColor' }}>EMERALD</span>
+          <span className={`mt-1 ps-[0.5em] text-[0.62rem] tracking-[0.5em] ${sub}`} style={{ fontFamily: 'Jost, sans-serif', fontWeight: 500 }}>DENTAL CLINIC</span>
         </span>
       )}
     </span>
