@@ -97,7 +97,7 @@ export default function Book() {
 
   return (
     <section className="min-h-screen px-2 pt-2 pb-24 md:px-4 md:pt-4">
-      <div className="rounded-[2rem] bg-[linear-gradient(180deg,#DDEDE3_0%,#EEF5F1_60%)] px-4 pt-32 pb-10 md:rounded-[2.75rem] md:px-10 md:pt-40">
+      <div className="rounded-[2rem] bg-[linear-gradient(180deg,#E9DCC3_0%,#FBF8F1_60%)] px-4 pt-32 pb-10 md:rounded-[2.75rem] md:px-10 md:pt-40">
         <div ref={root} className="mx-auto grid max-w-[80rem] gap-8 lg:grid-cols-[1fr_22rem]">
           <div>
             <p className="eyebrow text-emerald">{L('Online booking', 'الحجز أونلاين')}</p>

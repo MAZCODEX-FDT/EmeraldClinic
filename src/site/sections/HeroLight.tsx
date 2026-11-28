@@ -36,8 +36,8 @@ export function HeroLight() {
   }, { scope: root, dependencies: [lang], revertOnUpdate: true })
 
   const lines = lang === 'ar'
-    ? [{ t: 'بنحاول', c: 'text-emerald' }, { t: 'نحافظ على', c: 'text-charcoal' }, { t: 'سنتك.', c: 'text-charcoal' }]
-    : [{ t: 'WE TRY TO', c: 'text-emerald' }, { t: 'SAVE YOUR', c: 'text-charcoal' }, { t: 'TOOTH.', c: 'text-charcoal' }]
+    ? [{ t: 'بنحاول', c: 'text-gold' }, { t: 'نحافظ على', c: 'text-ivory' }, { t: 'سنتك.', c: 'text-ivory' }]
+    : [{ t: 'WE TRY TO', c: 'text-gold' }, { t: 'SAVE YOUR', c: 'text-ivory' }, { t: 'TOOTH.', c: 'text-ivory' }]
 
   const arches: { img?: string; title?: string; sub: string; stat?: number; suffix?: string; to?: string }[] = [
     { img: '/img/aligner-cut.webp', title: L('Clear Aligners', 'التقويم الشفاف'), sub: L('Straighter, quietly', 'تقويم مش باين'), to: '/treatments/clear-aligners' },
@@ -49,13 +49,12 @@ export function HeroLight() {
 
   return (
     <section ref={root} className="px-2 pt-2 md:px-4 md:pt-4">
-      <div className="relative isolate overflow-hidden rounded-[2rem] bg-[linear-gradient(180deg,#DDEDE3_0%,#C6E0D1_100%)] md:rounded-[2.75rem] lg:min-h-[calc(100svh-2rem)]">
+      <div className="relative isolate overflow-hidden jewel-bg rounded-[2rem] md:rounded-[2.75rem] lg:min-h-[calc(100svh-2rem)]">
         {wide && !prefersReducedMotion() && (
-          <div className="absolute inset-0 -z-10 opacity-60 mix-blend-multiply">
-            <Silk lightMode color="#CFE4D9" sheenColor="#FFFFFF" speed={1.6} scale={1.25} noiseIntensity={0.6} rotation={0.4} />
+          <div className="absolute inset-0 -z-10 opacity-25 mix-blend-soft-light">
+            <Silk color="#0B7A57" sheenColor="#E6CF9E" speed={1.6} scale={1.25} noiseIntensity={0.6} rotation={0.4} />
           </div>
         )}
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-white/70 to-transparent" />
 
         {/* portrait */}
         <div data-portrait className="pointer-events-none relative mx-auto mt-[19rem] h-[24rem] w-[19rem] sm:mt-[21rem] lg:absolute lg:inset-x-0 lg:top-[7%] lg:mt-0 lg:h-[78%] lg:w-[34rem]">
@@ -72,10 +71,10 @@ export function HeroLight() {
             <div className="hidden max-w-[17rem] pt-4 lg:block">
               <div data-fade className="flex flex-wrap gap-2">
                 {[L('Microscope endo', 'عصب بالميكروسكوب'), L('Written plans', 'خطط مكتوبة')].map((p) => (
-                  <span key={p} className="rounded-full bg-white px-4 py-2 text-xs text-charcoal shadow-sm">{p}</span>
+                  <span key={p} className="rounded-full border border-gold/50 bg-ivory/10 px-4 py-2 text-xs text-ivory backdrop-blur-sm">{p}</span>
                 ))}
               </div>
-              <p data-fade className="mt-5 text-[0.82rem] leading-relaxed text-charcoal/60">
+              <p data-fade className="mt-5 text-[0.82rem] leading-relaxed text-ivory/80">
                 {L('Honest, gentle dentistry in Nasr City. We explain before we treat, keep what can be kept, and write your plan before we begin.', 'طب أسنان صريح ومريح في مدينة نصر. بنشرح قبل ما نعالج، بنحافظ على اللي ينفع يتحافظ عليه، وبنكتب خطتك قبل ما نبدأ.')}
               </p>
             </div>
@@ -106,7 +105,7 @@ export function HeroLight() {
             return a.to ? <Link key={i} to={a.to} className="contents">{inner}</Link> : <div key={i} className="contents">{inner}</div>
           })}
         </div>
-        <div className="px-3 pb-4 lg:hidden"><PillCta dark to="/book" className="w-full !py-2.5">{L('Book a visit', 'احجز زيارة')}</PillCta></div>
+        <div className="px-3 pb-4 lg:hidden"><PillCta to="/book" className="w-full !py-2.5">{L('Book a visit', 'احجز زيارة')}</PillCta></div>
       </div>
     </section>
   )
